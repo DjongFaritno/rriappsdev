@@ -1,0 +1,44 @@
+[08-Nov-2016 02:46:48 UTC] PHP Notice:  Use of undefined constant BASEPATH - assumed 'BASEPATH' in /home/hidayati/project.hidayat.info/test.php on line 2
+[08-Nov-2016 02:46:48 UTC] PHP Warning:  require_once(BASEPATHcore/CodeIgniter.php): failed to open stream: No such file or directory in /home/hidayati/project.hidayat.info/test.php on line 2
+[08-Nov-2016 02:46:48 UTC] PHP Fatal error:  require_once(): Failed opening required 'BASEPATHcore/CodeIgniter.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/hidayati/project.hidayat.info/test.php on line 2
+[08-Nov-2016 10:52:04 Asia/Jakarta] PHP Fatal error:  Call to a member function get_databarang() on a non-object in /home/hidayati/project.hidayat.info/application/controllers/Stok.php on line 16
+[08-Nov-2016 20:22:15 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '$kode_barang' (T_VARIABLE) in /home/hidayati/project.hidayat.info/application/models/Stok_model.php on line 42
+[08-Nov-2016 20:22:30 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '$kode_barang' (T_VARIABLE) in /home/hidayati/project.hidayat.info/application/models/Stok_model.php on line 42
+[08-Nov-2016 21:22:15 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '}', expecting ';' or '{' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 32
+[08-Nov-2016 21:22:30 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '}', expecting ';' or '{' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 32
+[08-Nov-2016 21:22:32 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '}', expecting ';' or '{' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 32
+[08-Nov-2016 21:22:34 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '}', expecting ';' or '{' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 32
+[08-Nov-2016 21:53:37 Asia/Jakarta] PHP Fatal error:  Call to a member function render() on a non-object in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 47
+[08-Nov-2016 21:55:03 Asia/Jakarta] PHP Fatal error:  Call to a member function render() on a non-object in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 41
+[08-Nov-2016 22:07:40 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 85
+[08-Nov-2016 22:07:55 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 85
+[08-Nov-2016 22:07:57 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 40
+[09-Nov-2016 06:01:37 Asia/Jakarta] PHP Fatal error:  Call to undefined method Pembelian_model::get_sequence_bei() in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 116
+[09-Nov-2016 06:53:30 Asia/Jakarta] PHP Fatal error:  Call to undefined method Pembelian_model::get_sequence_bei() in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 116
+[09-Nov-2016 06:54:13 Asia/Jakarta] PHP Fatal error:  Call to undefined method Pembelian_model::get_sequence_bei() in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 116
+[09-Nov-2016 06:54:30 Asia/Jakarta] PHP Fatal error:  Call to a member function balance_stok() on a non-object in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 93
+[09-Nov-2016 06:54:46 Asia/Jakarta] PHP Fatal error:  Call to a member function insert_query() on a non-object in /home/hidayati/project.hidayat.info/application/controllers/Stok.php on line 190
+[09-Nov-2016 08:04:26 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:11:33 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:11:35 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:12:19 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:12:21 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:12:50 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:37:35 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:37:39 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 17
+[09-Nov-2016 08:38:12 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/views/vPembelian.php on line 61
+[09-Nov-2016 08:53:22 Asia/Jakarta] PHP Parse error:  syntax error, unexpected ',' in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 42
+[09-Nov-2016 10:37:03 Asia/Jakarta] PHP Fatal error:  Call to a member function encrypt() on a non-object in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 43
+[09-Nov-2016 11:31:09 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 81
+[09-Nov-2016 11:31:29 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 81
+[09-Nov-2016 12:09:40 Asia/Jakarta] PHP Fatal error:  Call to undefined method Hutang_model::get_penjualan() in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 74
+[09-Nov-2016 12:23:47 Asia/Jakarta] PHP Fatal error:  Call to undefined method Hutang_model::get_penjualan() in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 75
+[09-Nov-2016 13:57:06 Asia/Jakarta] PHP Fatal error:  Call to undefined method Hutang_model::get_penjualan() in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 75
+[09-Nov-2016 14:02:00 Asia/Jakarta] PHP Fatal error:  Call to undefined method Hutang_model::get_penjualan() in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 75
+[09-Nov-2016 14:02:12 Asia/Jakarta] PHP Fatal error:  Call to undefined method Hutang_model::get_penjualan() in /home/hidayati/project.hidayat.info/application/controllers/Hutang.php on line 75
+[09-Nov-2016 14:02:46 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 346
+[09-Nov-2016 14:02:52 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 346
+[09-Nov-2016 14:02:53 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 346
+[09-Nov-2016 14:19:18 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 346
+[09-Nov-2016 14:19:19 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 346
+[09-Nov-2016 14:36:38 Asia/Jakarta] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/hidayati/project.hidayat.info/application/controllers/Pembelian.php on line 322
