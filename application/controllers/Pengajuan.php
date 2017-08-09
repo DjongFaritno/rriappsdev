@@ -82,96 +82,95 @@ class Pengajuan extends FNZ_Controller
 		echo json_encode($data);
 	}
 
+	// function excel_pengajuan(){
+		// 		$user = $this->session->userdata('logged_in')['uid'];
+		// 		$data = $this->mpengajuan->get_list_data($user,'export-pengajuan');
+		//         //load our new PHPExcel library
+		// 		$this->load->library('excel');
+		// 		//activate worksheet number 1
+		// 		$this->excel->setActiveSheetIndex(0);
+		// 		//name the worksheet
+		// 		$this->excel->getActiveSheet()->setTitle('LIST PENGAJUAN');
+		// 		$this->excel->getActiveSheet()->setCellValue('A1', "LIST PENGAJUAN");
+		// 		$this->excel->getActiveSheet()->mergeCells('A1:C1');
+		// 		$this->excel->getActiveSheet()->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		// 		//header
+		// 		$this->excel->getActiveSheet()->setCellValue('A3', "No");
+		// 		$this->excel->getActiveSheet()->setCellValue('B3', "No Pengajuan");
+		// 		$this->excel->getActiveSheet()->setCellValue('C3', "Tanggal Pengajuan");
+		// 		$i  	= 4;
+		// 		if($data != null){
+		// 			foreach($data as $row){
+		//
+		// 				// $item  	= $row->nopengajuann.'-'.$row->tgl_pengajuan;
+		// 				//
+		// 				// $harga = $row->harga;
+		// 				// $jumlah = $row->jumlah;
+		// 				// $total = $harga*$jumlah;
+		//
+		// 				$this->excel->getActiveSheet()->setCellValue('A'.$i, $i-3);
+		// 				$this->excel->getActiveSheet()->setCellValue('B'.$i, $row->nopengajuan);
+		// 				$this->excel->getActiveSheet()->setCellValue('C'.$i, $row->tgl_pengajuan);
+		// 				$i++;
+		// 			}
+		// 		}
+		//
+		// 		for($col = 'A'; $col !== 'C'; $col++) {
+		//
+		// 		    $this->excel->getActiveSheet()
+		// 		        ->getColumnDimension($col)
+		// 		        ->setAutoSize(true);
+		// 		}
+		//
+		// 		$styleArray = array(
+		// 		  'borders' => array(
+		// 		    'allborders' => array(
+		// 		      'style' => PHPExcel_Style_Border::BORDER_THIN
+		// 		    )
+		// 		  )
+		// 		);
+		// 		$i = $i-1;
+		// 		$cell_to = "C".$i;
+		// 		$this->excel->getActiveSheet()->getStyle('A3:'.$cell_to)->applyFromArray($styleArray);
+		// 		$this->excel->getActiveSheet()->getStyle('A1:C3')->getFont()->setBold(true);
+		// 		$this->excel->getActiveSheet()->getStyle('A3:C3')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+		// 		$this->excel->getActiveSheet()->getStyle('A3:C3')->getFill()->getStartColor()->setRGB('BC8F8F');
+		//
+		// 		$filename='LIST PENGAJUAN.xls'; //save our workbook as this file name
+		// 		header('Content-Type: application/vnd.ms-excel'); //mime type
+		// 		header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+		// 		header('Cache-Control: max-age=0');//no cache
+		//
+		// 		//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+		// 		//if you want to save it as .XLSX Excel 2007 format
+		// 		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+		// 		//force user to download the Excel file without writing it to server's HD
+		// 		$objWriter->save('php://output');
+		// 	}
 
-
-		// function excel_pengajuan(){
-			// 		$user = $this->session->userdata('logged_in')['uid'];
-			// 		$data = $this->mpengajuan->get_list_data($user,'export-pengajuan');
-			//         //load our new PHPExcel library
-			// 		$this->load->library('excel');
-			// 		//activate worksheet number 1
-			// 		$this->excel->setActiveSheetIndex(0);
-			// 		//name the worksheet
-			// 		$this->excel->getActiveSheet()->setTitle('LIST PENGAJUAN');
-			// 		$this->excel->getActiveSheet()->setCellValue('A1', "LIST PENGAJUAN");
-			// 		$this->excel->getActiveSheet()->mergeCells('A1:C1');
-			// 		$this->excel->getActiveSheet()->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			// 		//header
-			// 		$this->excel->getActiveSheet()->setCellValue('A3', "No");
-			// 		$this->excel->getActiveSheet()->setCellValue('B3', "No Pengajuan");
-			// 		$this->excel->getActiveSheet()->setCellValue('C3', "Tanggal Pengajuan");
-			// 		$i  	= 4;
-			// 		if($data != null){
-			// 			foreach($data as $row){
-			//
-			// 				// $item  	= $row->nopengajuann.'-'.$row->tgl_pengajuan;
-			// 				//
-			// 				// $harga = $row->harga;
-			// 				// $jumlah = $row->jumlah;
-			// 				// $total = $harga*$jumlah;
-			//
-			// 				$this->excel->getActiveSheet()->setCellValue('A'.$i, $i-3);
-			// 				$this->excel->getActiveSheet()->setCellValue('B'.$i, $row->nopengajuan);
-			// 				$this->excel->getActiveSheet()->setCellValue('C'.$i, $row->tgl_pengajuan);
-			// 				$i++;
-			// 			}
-			// 		}
-			//
-			// 		for($col = 'A'; $col !== 'C'; $col++) {
-			//
-			// 		    $this->excel->getActiveSheet()
-			// 		        ->getColumnDimension($col)
-			// 		        ->setAutoSize(true);
-			// 		}
-			//
-			// 		$styleArray = array(
-			// 		  'borders' => array(
-			// 		    'allborders' => array(
-			// 		      'style' => PHPExcel_Style_Border::BORDER_THIN
-			// 		    )
-			// 		  )
-			// 		);
-			// 		$i = $i-1;
-			// 		$cell_to = "C".$i;
-			// 		$this->excel->getActiveSheet()->getStyle('A3:'.$cell_to)->applyFromArray($styleArray);
-			// 		$this->excel->getActiveSheet()->getStyle('A1:C3')->getFont()->setBold(true);
-			// 		$this->excel->getActiveSheet()->getStyle('A3:C3')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
-			// 		$this->excel->getActiveSheet()->getStyle('A3:C3')->getFill()->getStartColor()->setRGB('BC8F8F');
-			//
-			// 		$filename='LIST PENGAJUAN.xls'; //save our workbook as this file name
-			// 		header('Content-Type: application/vnd.ms-excel'); //mime type
-			// 		header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
-			// 		header('Cache-Control: max-age=0');//no cache
-			//
-			// 		//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-			// 		//if you want to save it as .XLSX Excel 2007 format
-			// 		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-			// 		//force user to download the Excel file without writing it to server's HD
-			// 		$objWriter->save('php://output');
-			// 	}
-
-			// function search_query(){
-			//
-			// 	$where = ' ';
-			//
-			// 	if($this->input->post('cek_s_nopengajuan')){
-			//
-			// 		$s_nopengajuan = $this->input->post('txt_s_nopengajuan');
-			//
-			// 		$where .= " nopengajuan like '%$s_nopengajuan%' ";
-			// 	}
-			//
-			// 	if($this->input->post('cek_s_tgl_pengajuan')){
-			//
-			// 		$s_tgl_pengajuan= $this->input->post('txt_s_tgl_pengajuan');
-			//
-			// 		$where .= $where==' '?' ':' AND ';
-			// 		$where .= " tgl_pengajuan like '%".$s_tgl_pengajuan."%' ";
-			// 	}
-			// 	$this->mpengajuan->insert_query($where);
-		// }
+		// function search_query(){
+		//
+		// 	$where = ' ';
+		//
+		// 	if($this->input->post('cek_s_nopengajuan')){
+		//
+		// 		$s_nopengajuan = $this->input->post('txt_s_nopengajuan');
+		//
+		// 		$where .= " nopengajuan like '%$s_nopengajuan%' ";
+		// 	}
+		//
+		// 	if($this->input->post('cek_s_tgl_pengajuan')){
+		//
+		// 		$s_tgl_pengajuan= $this->input->post('txt_s_tgl_pengajuan');
+		//
+		// 		$where .= $where==' '?' ':' AND ';
+		// 		$where .= " tgl_pengajuan like '%".$s_tgl_pengajuan."%' ";
+		// 	}
+		// 	$this->mpengajuan->insert_query($where);
+	// }
 
 	//----------------------------------------------------------form ADD PENGAJUAN
+
 	function add_pengajuan()
 	{
 		//get data kategori
@@ -234,8 +233,8 @@ class Pengajuan extends FNZ_Controller
 		echo "true";
 	}
 
-
-	function delete_pengajuan($idpengajuan){
+	function delete_pengajuan($idpengajuan)
+	{
 		$nopengajuan = $this->mpengajuan->get_pengajuanHD($idpengajuan);
 		if($nopengajuan != null)
 		{
@@ -246,8 +245,8 @@ class Pengajuan extends FNZ_Controller
 		}
 	}
 
-
 	//----------------------------------------------------------form EDIT PENGAJUAN
+
 	function pengajuanEdit($idpengajuan)
 	{
 		//get data kategori
@@ -324,7 +323,8 @@ class Pengajuan extends FNZ_Controller
 		}
 	}
 
-	function cekduplicatekategori($nopengajuan,$kategori){
+	function cekduplicatekategori($nopengajuan,$kategori)
+	{
 		$data = $this->mpengajuan->kategori($nopengajuan,$kategori);
 		echo json_encode($data);
 	}
@@ -448,6 +448,7 @@ class Pengajuan extends FNZ_Controller
 	}
 
 	//----------------------------------------------------------form view PENGAJUANdt2
+
 	function view_pengajuandt2($idsub)
 	{
 		$vdata['nopengajuandt1']=$this->mpengajuan->get_nopengajuandt1($idsub);
@@ -478,7 +479,8 @@ class Pengajuan extends FNZ_Controller
 		echo json_encode($data);
 	}
 
-	function ProsesInsertPart(){
+	function ProsesInsertPart()
+	{
 		$nopengajuan   			= $this->input->post('nopengajuan');
 		$partno   			= $this->input->post('partno');
 		$idsub 	= $this->input->post('idsub');
@@ -492,7 +494,9 @@ class Pengajuan extends FNZ_Controller
 		{			
 			//save new
 			$this->mpengajuan->insert_barang($data);
-		}else{
+		}
+		else
+		{
 			//update
 			$this->db->where('partno',$partno);
 			$this->db->update('pengajuan_dt2',$data);

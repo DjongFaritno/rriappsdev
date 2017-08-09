@@ -16,24 +16,24 @@ $(document).ready(function(){
 });
 
 
-function isNumberKey(evt){ //untuk validasi hanya input angka
+function isNumberKey(evt)
+{ //untuk validasi hanya input angka
 	var charCode = (evt.which) ? evt.which : event.keyCode
 	if (charCode > 31 && (charCode < 48 || charCode > 57))
 	return false;
 	return true;
 }
 
-function OtomatisKapital(a){
+function OtomatisKapital(a)
+{
     setTimeout(function(){
         a.value = a.value.toUpperCase();
     }, 1);
 }
 
-function setTable(){
+function setTable()
+{
 	var my_table = $('#tb_list').DataTable({
-	//   scrollY:'70vh',
-	//   scrollCollapse: true,
-	//   scrollX: true,
 	  processing: true,
 	  serverSide: true,
 	  ordering: false,
@@ -43,37 +43,38 @@ function setTable(){
 		},
 	  bFilter:false,
 	  dom: "<'row'<'col-sm-12'tr>>" +
-	      "<'row'<'col-sm-5'l><'col-sm-7'pi>>" });
+		  "<'row'<'col-sm-5'l><'col-sm-7'pi>>" 
+	});
 }
 
 // function modalSearch(){
-// 	$('#modal_search').modal('show');
-// }
-//
-// function searchAct(){
-// 	$("#form_search").ajaxSubmit({
-// 		url: base_url+'pengajuan/search_query',
-// 		type: 'post',
-// 		success: function(){
-// 			var table = $('#tb_list').DataTable();
-// 			table.ajax.reload( null, false );
-// 			$('#modal_search').modal('toggle');
-// 			// clearForm();
-// 		}
-// 	});
+	// 	$('#modal_search').modal('show');
+	// }
+	//
+	// function searchAct(){
+	// 	$("#form_search").ajaxSubmit({
+	// 		url: base_url+'pengajuan/search_query',
+	// 		type: 'post',
+	// 		success: function(){
+	// 			var table = $('#tb_list').DataTable();
+	// 			table.ajax.reload( null, false );
+	// 			$('#modal_search').modal('toggle');
+	// 			// clearForm();
+	// 		}
+	// 	});
 // }
 
 // function excelData(){
-// 	window.location = base_url+'pengajuan/excel_pengajuan';
+	// 	window.location = base_url+'pengajuan/excel_pengajuan';
 // }
-
 
 function FormPengajuanBAru()
 {
 	window.location = base_url+'pengajuan/add_pengajuan'
 }
 
-function ViewDetailPengajuan(nopengajuan){
+function ViewDetailPengajuan(nopengajuan)
+{
 
 	$.ajax({
 
@@ -95,51 +96,49 @@ function ViewDetailPengajuan(nopengajuan){
 	});
 }
 
-function cancelForm(){
+function cancelForm()
+{
 	bootbox.confirm("Anda yakin akan membatalkan form ini ?",
-	function(result){
-		if(result==true){
-			window.location = base_url+'pengajuan';
+		function(result){
+			if(result==true){
+				window.location = base_url+'pengajuan';
+			}
 		}
-	}
 	);
 }
 
-function ViewDt1(idpengajuan){
-	// bootbox.confirm("ON PROGRESS!!",
-	// function(result){
-	// 	if(result==true){
-			window.location = base_url+'pengajuan/view_pengajuan/'+idpengajuan;
-	// 	}
-	// }
-	// );
+function ViewDt1(idpengajuan)
+{
+	window.location = base_url+'pengajuan/view_pengajuan/'+idpengajuan;
 }
 
-function Ubah(idpengajuan,nopengajuan,status){
-			var $status = status;
-			if($status=='nonactive')
-			{
-				bootbox.alert("<div class='callout callout-info'><span class='glyphicon glyphicon-exclamation-sign'></span> Tidak Bisa Diubah, Karena Sudah DIjadikan PERTEK</div>",
-					function(result){
-						if(result==true){
+function Ubah(idpengajuan,nopengajuan,status)
+{
+	var $status = status;
+	if($status=='nonactive')
+	{
+		bootbox.alert("<div class='callout callout-info'><span class='glyphicon glyphicon-exclamation-sign'></span> Tidak Bisa Diubah, Karena Sudah DIjadikan PERTEK</div>",
+			function(result){
+				if(result==true){
 
-						}
-					}
-				);
-			}else{
-				bootbox.confirm("Yakin Akan Merubah "+nopengajuan+"?",
-				function(result){
-					if(result==true){
-						window.location = base_url+'pengajuan/pengajuanEdit/'+idpengajuan;
-					}
 				}
-				);
-
 			}
+		);
+	}
+	else
+	{
+		bootbox.confirm("Yakin Akan Merubah "+nopengajuan+"?",
+		function(result){
+			if(result==true){
+				window.location = base_url+'pengajuan/pengajuanEdit/'+idpengajuan;
+			}
+		}
+		);
+
+	}
 }
 
 function DeletePengajuan(idpengajuan,nopengajuan,status){
-	// var $status = status;
 	if(status=='nonactive')
 	{
 		bootbox.alert("<div class='callout callout-danger'><span class='glyphicon glyphicon-exclamation-sign'></span> Tidak Bisa Dihapus, Karena Sudah DIjadikan PERTER</div>",
@@ -149,13 +148,15 @@ function DeletePengajuan(idpengajuan,nopengajuan,status){
 				}
 			}
 		);
-	}else{
+	}
+	else
+	{
 		bootbox.confirm("Yakin Akan Menghapus "+nopengajuan+"?",
-		function(result){
-			if(result==true){
-				window.location = base_url+'pengajuan/delete_pengajuan/'+idpengajuan;
+			function(result){
+				if(result==true){
+					window.location = base_url+'pengajuan/delete_pengajuan/'+idpengajuan;
+				}
 			}
-		}
 		);
 
 	}

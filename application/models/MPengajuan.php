@@ -8,68 +8,66 @@ class MPengajuan extends CI_Model {
         // Call the CI_Model constructor
         parent::__construct();
     }
+
 	function get_list_data($user,$menu)
 	{
 		$this->db->where('user',$user);
 		$this->db->where('menu',$menu);
 		$data = $this->db->get('query')->row();
-		if($data==null){ //data null = pertama kali load page
+		if($data==null)//data null = pertama kali load page
+		{
+			$this->db->select('idpengajuan, nopengajuan, tgl_pengajuan, status');
+			$this->db->from('pengajuan_hd');
+			$this->db->order_by('nopengajuan','desc');
+			return $this->db->get()->result();
 
-		$this->db->select('idpengajuan, nopengajuan, tgl_pengajuan, status');
-		$this->db->from('pengajuan_hd');
-		$this->db->order_by('nopengajuan','desc');
-		return $this->db->get()->result();
-
-		//query yang akan digunakan untuk export ke excel
-		$this->insert_query_report();
-		}else{
-		$query = $data->query;
-		return $this->db->query($query)->result();
-			}
+			//query yang akan digunakan untuk export ke excel
+			$this->insert_query_report();
+		}else
+		{
+			$query = $data->query;
+			return $this->db->query($query)->result();
+		}
 	}
 
-	function query_data_pengajuan($nopengajuan){
+	function query_data_pengajuan($nopengajuan)
+	{
 		$data = array();
 		$data=$this->db->query("SELECT * from pengajuan_hd where nopengajuan='$nopengajuan'")->row_array();
 		return $data;
-		}
+	}
 
-	function insert_query($param){
+	function insert_query($param)
+	{
+		$sql 	= "SELECT * from pengajuan_hd";
 
-				$sql 	= "SELECT * from pengajuan_hd";
+		if(trim($param)!='')$sql .= " WHERE ".$param;
 
-				if(trim($param)!='')$sql .= " WHERE ".$param;
+		$sql .= " ORDER BY nopengajuan DESC";
+		$ardata = array(
+			'user' 	=> $this->session->userdata('logged_in')['uid'],
+			'menu' 	=> 'pengajuan',
+			'query'	=> $sql
+		);
 
-				$sql .= " ORDER BY nopengajuan DESC";
-				$ardata = array(
-
-					'user' 	=> $this->session->userdata('logged_in')['uid'],
-					'menu' 	=> 'pengajuan',
-					'query'	=> $sql
-				);
-
-				$this->db->replace('query',$ardata);
-				// print($print);
-								// //query yang akan digunakan untuk export ke excel
-				$this->insert_query_report($param);
-				}
+		$this->db->replace('query',$ardata);
+		// //query yang akan digunakan untuk export ke excel
+		$this->insert_query_report($param);
+	}
 
 	function insert_query_report($param='')
-				{
-				$sql 	= "SELECT * from pengajuan_hd";
+	{
+		$sql 	= "SELECT * from pengajuan_hd";
+		if(trim($param)!='')$sql .= " WHERE ".$param;
+		$sql .= " ORDER BY nopengajuan DESC";
+		$ardata = array(
+			'user' 	=> $this->session->userdata('logged_in')['uid'],
+			'menu' 	=> 'export-pengajuan',
+			'query'	=> $sql
+		);
 
-				if(trim($param)!='')$sql .= " WHERE ".$param;
-
-				$sql .= " ORDER BY nopengajuan DESC";
-
-				$ardata = array(
-				'user' 	=> $this->session->userdata('logged_in')['uid'],
-				'menu' 	=> 'export-pengajuan',
-				'query'	=> $sql
-				);
-
-				$this->db->replace('query',$ardata);
-				}
+		$this->db->replace('query',$ardata);
+	}
 
 	// function insert_pengajuan($data)
 	// 	{
