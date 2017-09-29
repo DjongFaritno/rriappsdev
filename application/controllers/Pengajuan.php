@@ -38,22 +38,15 @@ class Pengajuan extends FNZ_Controller
 			$privilege = $this->session->userdata('logged_in')['priv'];
 			if ($privilege=='OPERATOR')//jika sebagai operator, maka tidak bisa hapus data
 			{
-				$act = '- || <a class="btn btn-info alert-success btn-xs fa-edit " href="#" onclick="editKeluar(\''.$data[$i]->idpengajuan.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+				$act = '- || <a class="btn btn-info alert-success btn-xs fa-edit " data-toggle="tooltip" title="Change Data!" href="#" onclick="editKeluar(\''.$data[$i]->idpengajuan.'\')"><i class="fa fa-fw fa-edit"></i></a>';
 				// $act = '<a class="btn bg-black-active color-palette" href="#" <i class="fa fa-fw fa-edit"></i>Sudah dijadikan Pertek</a>  ||
 				// <a class="btn btn-info alert-info btn-xs  " href="#" onclick="ViewDt1(\''.$data[$i]->nopengajuan.'\')"><i class="fa fa-fw fa-file-text"></i>Lihat</a>';
 			}
 			else
 			{
-				$act = '<div class="btn-group ">
-				<button type="button" class="btn btn-danger btn-flat dropdown-toggle btn-xs" data-toggle="dropdown">
-				Action<span class="caret"></span>
-				<span class="sr-only">Toggle Dropdown</span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-				<li><a href="#" onclick="ViewDt1(\''.$data[$i]->idpengajuan.'\')"><i class="fa fa-fw fa-file-text"> LIHAT</i></a></li>
-				<li><a href="#" onclick="Ubah(\''.$data[$i]->idpengajuan.'\',\''.$data[$i]->nopengajuan.'\',\''.$data[$i]->status.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a></li>
-				<li><a href="#" onclick="DeletePengajuan(\''.$data[$i]->idpengajuan.'\',\''.$data[$i]->nopengajuan.'\',\''.$data[$i]->status.'\')"><i class="fa fa-fw fa-trash"></i>Hapus</a></li>
-				</ul>';
+				$act = '<a class="btn btn-success"  href="#" data-toggle="tooltip" title="View Data!" onclick="ViewDt1(\''.$data[$i]->idpengajuan.'\')"><i class="fa fa-fw fa-file-text"></i></a> 
+						<a class="btn btn-warning"  href="#" data-toggle="tooltip" title="Edit Data!" onclick="Ubah(\''.$data[$i]->idpengajuan.'\',\''.$data[$i]->nopengajuan.'\',\''.$data[$i]->status.'\')"><i class="fa fa-fw fa-edit"></i></a> 
+						<a class="btn btn-danger"  href="#" data-toggle="tooltip" title="Delete Data!" onclick="DeletePengajuan(\''.$data[$i]->idpengajuan.'\',\''.$data[$i]->nopengajuan.'\',\''.$data[$i]->status.'\')"><i class="fa fa-fw fa-trash"></i></a>';
 			}
 
 			$records["data"][] = array(
@@ -169,7 +162,7 @@ class Pengajuan extends FNZ_Controller
 		// 	$this->mpengajuan->insert_query($where);
 	// }
 
-	//----------------------------------------------------------form ADD PENGAJUAN
+//----------------------------------------------------------form ADD PENGAJUAN
 
 	function add_pengajuan()
 	{
@@ -240,12 +233,11 @@ class Pengajuan extends FNZ_Controller
 		{
 			$nopengajuan = $nopengajuan->nopengajuan;
 			$this->mpengajuan->ProsesDeletePengajuan($idpengajuan,$nopengajuan);
-
 			header('location:'.base_url().'pengajuan');
 		}
 	}
 
-	//----------------------------------------------------------form EDIT PENGAJUAN
+//----------------------------------------------------------form EDIT PENGAJUAN
 
 	function pengajuanEdit($idpengajuan)
 	{
@@ -294,13 +286,13 @@ class Pengajuan extends FNZ_Controller
 				$privilege = $this->session->userdata('logged_in')['priv'];
 				if ($privilege=='OPERATOR')//jika sebagai operator, maka tidak bisa hapus data
 				{
-					$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit " href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+					$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit" data-toggle="tooltip" title="Change Data!" href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i></a>';
 				}
 				else
 				{
-					$act = '<a class="btn btn-danger alert-danger btn-xs" href="#" onclick="
+					$act = '<a class="btn btn-danger alert-danger btn-xs" href="#" data-toggle="tooltip" title="Delete Data!" onclick="
 					DeleteKategori(\''.$data[$i]->id_sub.'\',\''.$idpengajuan.'\',\''.$data[$i]->kd_kategori.'\')">
-					<i class="fa fa-fw fa-trash"></i>Hapus</a>';
+					<i class="fa fa-fw fa-trash"></i></a>';
 				}
 				$records["data"][] = array(
 					$data[$i]->kd_kategori,
@@ -371,7 +363,7 @@ class Pengajuan extends FNZ_Controller
 		echo 'true';
 	}
 
-	//----------------------------------------------------------form view PENGAJUANdt1
+//----------------------------------------------------------form view PENGAJUANdt1
 
 	function view_pengajuan($idpengajuan)
 	{
@@ -414,20 +406,16 @@ class Pengajuan extends FNZ_Controller
 				$privilege = $this->session->userdata('logged_in')['priv'];
 				if ($privilege=='OPERATOR')//jika sebagai operator, maka tidak bisa hapus data
 				{
-					$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit " href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+					$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit" data-toggle="tooltip" title="Change Data!" href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
 				}
 				else
 				{
-					$act = '<a class="btn btn-info alert-info btn-xs  " href="#" onclick="ViewDt2(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-file-text"></i>List Part</a>';
+					$act = '<a class="btn btn-info alert-info btn-xs " data-toggle="tooltip" title="List Part!" href="#" onclick="ViewDt2(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-file-text"></i>List Part</a>';
 				}
 				$records["data"][] = array(
 					$data[$i]->kd_kategori,
 					$data[$i]->nama_kategori,
-					// $example = "1234567";
-					// $subtotal =  number_format($example, 2, '.', ',');
-					// echo $subtotal;
 					number_format($data[$i]->kuota, 0, '.', ','),
-					// $data[$i]->kuota,
 					$data[$i]->ukuran,
 					$data[$i]->keterangan,
 					$act
@@ -447,7 +435,7 @@ class Pengajuan extends FNZ_Controller
 		echo json_encode($data);
 	}
 
-	//----------------------------------------------------------form view PENGAJUANdt2
+//----------------------------------------------------------form view PENGAJUANdt2
 
 	function view_pengajuandt2($idsub)
 	{
@@ -471,13 +459,19 @@ class Pengajuan extends FNZ_Controller
 
 	}
 
-	function cekduplicatepart($idsub,$partno)
+	function cekduplicatepart($partno)
 	{
 		$partno = urldecode($partno);
-		$idsub = urldecode($idsub);
-		$data = $this->mpengajuan->cekbarang($idsub,$partno);
+		$data = $this->mpengajuan->cekbarang($partno);
 		echo json_encode($data);
 	}
+	// function cekduplicatepart($idsub,$partno)
+	// {
+	// 	$partno = urldecode($partno);
+	// 	$idsub = urldecode($idsub);
+	// 	$data = $this->mpengajuan->cekbarang($idsub,$partno);
+	// 	echo json_encode($data);
+	// }
 
 	function ProsesInsertPart()
 	{
@@ -532,11 +526,11 @@ class Pengajuan extends FNZ_Controller
 
 			if ($privilege=='OPERATOR')//jika sebagai operator, maka tidak bisa hapus data
 			{
-				$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit " href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+				$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit" data-toggle="tooltip" title="Change Data '.$data[$i]->partno.'!" href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i></a>';
 			}
 			else
 			{
-				$act = '<a class="btn btn-danger alert-danger btn-xs" href="#" onclick="DeletePart(\''.$data[$i]->id_sub.'\',\''.$data[$i]->partno.'\')"><i class="fa fa-fw fa-trash"></i>Hapus</a>';
+				$act = '<a class="btn btn-danger alert-danger btn-xs" data-toggle="tooltip" title="Delete Data '.$data[$i]->partno.' !" href="#" onclick="DeletePart(\''.$data[$i]->id_sub.'\',\''.$data[$i]->partno.'\')"><i class="fa fa-fw fa-trash"></i></a>';
 			}
 
 			$records["data"][] = array(

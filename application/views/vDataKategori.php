@@ -24,12 +24,12 @@ var base_url = '<?php echo base_url(); ?>';
 				  <h3 class="box-title"><?php echo $title; ?></h3>
 				  <div class="box-tools">
 						<div class="btn-group pull-right">
-	                      <button type="button" class="btn btn-sm btn-warning" onclick="modalSearch()">
-	                    <i class="glyphicon glyphicon-search"></i>&nbsp;CARI</button>
-	                <button type="button" class="btn btn-success btn-sm" onclick="excelData()">
-	                    <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;EXCEL</button>
-	                  <button type="button" class="btn btn-primary btn-sm" onclick="modalAddkategori()">
-	                  <i class="glyphicon glyphicon-plus fa-fw"></i>&nbsp;KATEGORI</button>
+	                  <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Tambah Kategori" onclick="modalAddkategori()">
+	                  <i class="glyphicon glyphicon-plus fa-fw"></i>&nbsp;</button>
+	                      <button type="button" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Cari Kategori" onclick="modalSearch()">
+	                    <i class="glyphicon glyphicon-search"></i>&nbsp;</button>
+	                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Excel" onclick="excelData()">
+	                    <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;</button>
 	                  </div>
 									</div>
 				</div><!-- /.box-header -->
@@ -77,7 +77,9 @@ var base_url = '<?php echo base_url(); ?>';
 					<div class="form-group">
 						<label for="exampleFIELD2">NAMA KATEGORI</label>
 						 <!-- <div id='myform_uraianbarang_errorloc' class="error_strings"></div> -->
-						<input class="form-control" type="text" maxlength = "100" name="namakategori" id="namakategori"  onkeydown="OtomatisKapital(this)">
+						 <!-- <input class="form-control" type="text" maxlength = "100" name="namakategori" id="namakategori"  onkeydown="OtomatisKapital(this)">  -->
+            <!-- <textarea class="form-control" rows="3" name="namakategori" id="namakategori" onkeydown="OtomatisKapital(this)"></textarea> -->
+              <textarea type="text" class="form-control" name="namakategori" id="namakategori" onkeydown="OtomatisKapital(this)"></textarea> 
 					</div>
 					<!-- //status -->
 						<div class="form-group">

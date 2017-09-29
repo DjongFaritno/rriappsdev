@@ -117,23 +117,39 @@ function Ubah(idpengajuan,nopengajuan,status)
 	var $status = status;
 	if($status=='nonactive')
 	{
-		bootbox.alert("<div class='callout callout-info'><span class='glyphicon glyphicon-exclamation-sign'></span> Tidak Bisa Diubah, Karena Sudah DIjadikan PERTEK</div>",
-			function(result){
-				if(result==true){
-
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;PERINGATAN!!</div>",
+			message: "Tidak bisa diubah,Karena sudah dijadikan PERTEK",
+			// buttons: {
+				OK: {
+					label: '<i class="fa fa-check"></i> Ya',
+					className: 'btn-danger'
 				}
-			}
-		);
+			// },
+		});
 	}
 	else
 	{
-		bootbox.confirm("Yakin Akan Merubah "+nopengajuan+"?",
-		function(result){
-			if(result==true){
-				window.location = base_url+'pengajuan/pengajuanEdit/'+idpengajuan;
+		bootbox.confirm({
+			size: "small",
+			title: "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;KONFIRMASI!!",
+			message: "Yakin Akan Merubah <b>"+nopengajuan+"<b/>",
+			buttons: {
+				cancel: {
+					label: '<i class="fa fa-times"></i> Tidak',
+					className: 'btn-success'
+				},
+				confirm: {
+					label: '<i class="fa fa-check"></i> Ya',
+					className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				if(result==true){
+					window.location = base_url+'pengajuan/pengajuanEdit/'+idpengajuan;
+				}
 			}
-		}
-		);
+		});
 
 	}
 }
@@ -141,23 +157,39 @@ function Ubah(idpengajuan,nopengajuan,status)
 function DeletePengajuan(idpengajuan,nopengajuan,status){
 	if(status=='nonactive')
 	{
-		bootbox.alert("<div class='callout callout-danger'><span class='glyphicon glyphicon-exclamation-sign'></span> Tidak Bisa Dihapus, Karena Sudah DIjadikan PERTER</div>",
-			function(result){
-				if(result==true){
-
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;PERINGATAN!!</div>",
+			message: "Tidak bisa dihapus,Karena sudah dijadikan PERTEK",
+			// buttons: {
+				OK: {
+					label: '<i class="fa fa-check"></i> Ya',
+					className: 'btn-danger'
 				}
-			}
-		);
+			// },
+		});
 	}
 	else
 	{
-		bootbox.confirm("Yakin Akan Menghapus "+nopengajuan+"?",
-			function(result){
+		bootbox.confirm({
+			size: "small",
+			title: "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;KONFIRMASI!!",
+			message: "Yakin hapus <b>"+nopengajuan+"<b/>",
+			buttons: {
+				cancel: {
+					label: '<i class="fa fa-times"></i> Tidak',
+					className: 'btn-success'
+				},
+				confirm: {
+					label: '<i class="fa fa-check"></i> Ya',
+					className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
 				if(result==true){
 					window.location = base_url+'pengajuan/delete_pengajuan/'+idpengajuan;
 				}
 			}
-		);
+		});
 
 	}
 }

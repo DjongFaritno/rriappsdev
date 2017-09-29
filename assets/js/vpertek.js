@@ -16,7 +16,6 @@ $(document).ready(function(){
 
 });
 
-
 function isNumberKey(evt){ //untuk validasi hanya input angka
 	var charCode = (evt.which) ? evt.which : event.keyCode
 	if (charCode > 31 && (charCode < 48 || charCode > 57))
@@ -48,24 +47,24 @@ function setTable(){
 }
 
 // function modalSearch(){
-// 	$('#modal_search').modal('show');
-// }
-//
-// function searchAct(){
-// 	$("#form_search").ajaxSubmit({
-// 		url: base_url+'pengajuan/search_query',
-// 		type: 'post',
-// 		success: function(){
-// 			var table = $('#tb_list').DataTable();
-// 			table.ajax.reload( null, false );
-// 			$('#modal_search').modal('toggle');
-// 			// clearForm();
-// 		}
-// 	});
+	// 	$('#modal_search').modal('show');
+	// }
+	//
+	// function searchAct(){
+	// 	$("#form_search").ajaxSubmit({
+	// 		url: base_url+'pengajuan/search_query',
+	// 		type: 'post',
+	// 		success: function(){
+	// 			var table = $('#tb_list').DataTable();
+	// 			table.ajax.reload( null, false );
+	// 			$('#modal_search').modal('toggle');
+	// 			// clearForm();
+	// 		}
+	// 	});
 // }
 
 // function excelData(){
-// 	window.location = base_url+'pengajuan/excel_pengajuan';
+	// 	window.location = base_url+'pengajuan/excel_pengajuan';
 // }
 
 function ViewDt1(idpertek){
@@ -79,48 +78,61 @@ function ViewDt1(idpertek){
 }
 
 function DeletePertek(idpertek,nopertek){
-	bootbox.confirm("Anda yakin akan menghapus "+nopertek+" ?",
-		function(result)
-		{
-					if(result==true)
-					{
-								//cek apakah sudah digunakan di invoice
-								$.ajax({
+	bootbox.confirm({
+		size: "large",
+		title: "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;KONFIRMASI!!",
+		message: "Yakin Akan Menghapus <b>"+nopertek+"<b/>",
+		buttons: {
+			cancel: {
+				label: '<i class="fa fa-times"></i> Tidak',
+				className: 'btn-success'
+			},
+			confirm: {
+				label: '<i class="fa fa-check"></i> Ya',
+				className: 'btn-danger'
+			}
+		},
+		callback: function (result) {
+			if(result==true)
+			{
+				//cek apakah sudah digunakan di invoice
+				$.ajax({
 
-									type:"POST",
-									url:base_url+"pertek/cek_invoice/"+idpertek,
-									// url:str_url,
-									dataType:"html",
-									success:function(data)
-										{
-														var data = $.parseJSON(data);
-															if (data !== null )
-																	{//jika barang sudah ada
-																			var title 		= "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;IN USE!!";
-																			var str_message = "TIDAK BISA DIHAPUS, SUDAH ADA INVOICE !!";
-																			bootbox.alert
-																			({
-																					size:'small',
-																					title:title,
-																					message:str_message,
-																					buttons:
-																					{
-																							ok:{
-																								label: 'OK',
-																								className: 'btn-danger'
-																							}
-																					}
-																			});
-																			return false;
-																	} else
-																	{
-																				window.location = base_url+'pertek/delete_pertek/'+idpertek;
-																	}
-												}
-								});
+					type:"POST",
+					url:base_url+"pertek/cek_invoice/"+idpertek,
+					// url:str_url,
+					dataType:"html",
+					success:function(data)
+					{
+						var data = $.parseJSON(data);
+						if (data !== null )
+						{//jika barang sudah ada
+							var title 		= "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;IN USE!!";
+							var str_message = "TIDAK BISA DIHAPUS, SUDAH ADA INVOICE !!";
+							bootbox.alert
+							({
+								size:'small',
+								title:title,
+								message:str_message,
+								buttons:
+								{
+									ok:{
+										label: 'OK',
+										className: 'btn-danger'
+									}
+								}
+							});
+							return false;
+						} 
+						else
+						{
+							window.location = base_url+'pertek/delete_pertek/'+idpertek;
+						}
 					}
+				});
+			}
 		}
-	);
+	});
 }
 
 function ONprosses(){

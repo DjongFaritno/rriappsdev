@@ -52,27 +52,25 @@ function OtomatisKapital(a){
 }
 
 // function modalSearch(){
-// 	$('#modal_search').modal('show');
-// }
-//
-// function searchAct(){
-// 	$("#form_search").ajaxSubmit({
-// 		url: base_url+'pengajuan/search_query',
-// 		type: 'post',
-// 		success: function(){
-// 			var table = $('#tb_list').DataTable();
-// 			table.ajax.reload( null, false );
-// 			$('#modal_search').modal('toggle');
-// 			// clearForm();
-// 		}
-// 	});
-// }
+	// 	$('#modal_search').modal('show');
+	// }
+	//
+	// function searchAct(){
+	// 	$("#form_search").ajaxSubmit({
+	// 		url: base_url+'pengajuan/search_query',
+	// 		type: 'post',
+	// 		success: function(){
+	// 			var table = $('#tb_list').DataTable();
+	// 			table.ajax.reload( null, false );
+	// 			$('#modal_search').modal('toggle');
+	// 			// clearForm();
+	// 		}
+	// 	});
+	// }
 
-// function excelData(){
-// 	window.location = base_url+'pengajuan/excel_pengajuan';
+	// function excelData(){
+	// 	window.location = base_url+'pengajuan/excel_pengajuan';
 // }
-
-
 
 function cancelForm(){
 
@@ -97,13 +95,16 @@ function modalAddItem(){
 	var status =$('#status').val()
 	if(status=='nonactive')
 	{
-		bootbox.alert("<div class='callout callout-danger'><span class='glyphicon glyphicon-exclamation-sign'></span>Tidak Bisa Add</div>",
-			function(result){
-				if(result==true){
-
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;PERINGATAN!!</div>",
+			message: "Tidak bisa tambah Part,Karena sudah dijadikan PERTEK",
+			// buttons: {
+				OK: {
+					label: '<i class="fa fa-check"></i> Ya',
+					className: 'btn-danger'
 				}
-			}
-		);
+			// },
+		});
 	}else{
 		$('#txt_Qty').val('');
 		$('#modal_add_item').modal('show');
@@ -122,7 +123,7 @@ function pilihItem(){
 }
 
 function TambahBarang(){
-	var nopengajuan  = $('#txt_no_pengajuan').val();
+	var nopengajuan  			= $('#txt_no_pengajuan').val();
 	var item 					= $('#opt_item').val().split('#');
 	var partno 					= item[0];
 	var idsub 					= $('#txt_id_sub').val();
@@ -134,74 +135,52 @@ function TambahBarang(){
 	}
 	else if (action == 'SIMPAN') // add new apa update, jika add new cek data sudah ada atau belum
 	{
-			var str_url  	= encodeURI(base_url+"pengajuan/cekduplicatepart/"+idsub+"/"+partno);
-						$.ajax({
+		// var str_url  	= encodeURI(base_url+"pengajuan/cekduplicatepart/"+idsub+"/"+partno);
+		var str_url  	= encodeURI(base_url+"pengajuan/cekduplicatepart/"+partno);
+			$.ajax({
 
-						type:"POST",
-						// url:base_url+"pengajuan/cekduplicatepart/"+idsub+"/"+partno,
-						url:str_url,
-						dataType:"html",
-						success:function(data)
+			type:"POST",
+			// url:base_url+"pengajuan/cekduplicatepart/"+idsub+"/"+partno,
+			url:str_url,
+			dataType:"html",
+			success:function(data)
+			{
+				var data = $.parseJSON(data);
+				// print(data);
+				
+					if (data !== null )
+					{//jika barang sudah ada
+						var nopengajuan_D = data['nopengajuan'];
+						var title 		= "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;PERINGATAN!!";
+						var str_message = "Part tidak bisa disimpan karena sudah ada di Pengajuan "+nopengajuan_D+" dengan status ACTIVE!!!";
+						bootbox.alert
+						({
+							size:'small',
+							title:title,
+							message:str_message,
+							buttons:
+							{
+								ok:{
+									label: 'OK',
+									className: 'btn-danger'
+								}
+							}
+						});
+						return false;
+					}
+					else
+					{
+						$('#btn_simpan').hide();
+						$('#img-load').show();
+
+						var json_data 	=
 						{
-										var data = $.parseJSON(data);
-										// print(data);
-
-													if (data !== null )
-													{//jika barang sudah ada
-															var title 		= "<span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;DUPLICATE DATA!!";
-															var str_message = "PARTNO SUDAH ADA!!!";
-															bootbox.alert
-															({
-																	size:'small',
-																	title:title,
-																	message:str_message,
-																	buttons:
-																	{
-																			ok:{
-																				label: 'OK',
-																				className: 'btn-danger'
-																			}
-																	}
-															});
-															return false;
-													}
-													// else
-													// {
-													$('#btn_simpan').hide();
-													$('#img-load').show();
-
-													var json_data 	=
-													{
-															'nopengajuan' : nopengajuan,
-															'partno' 	: partno,
-															'idsub' 	: idsub,
-															'action' 	: action
-													};
-													$.ajax({
-																type:"POST",
-																url:base_url+"pengajuan/ProsesInsertPart",
-																dataType:"JSON",
-																data:json_data,
-																success:function(data){
-																	window.location = base_url+'pengajuan/view_pengajuandt2/'+idsub;
-																}
-													});
-													// }
-						}
-					});
-	}else{
-		//tidak ada, ok proses simpan
-				$('#btn_simpan').hide();
-				$('#img-load').show();
-
-				var json_data 	=
-				{
-					'nopengajuan' : nopengajuan,
-						'partno' 	: partno,
-						'idsub' 	: idsub,
-						'action' 	: action
-				};
-				$.ajax({
+							'nopengajuan' : nopengajuan,
+							'partno' 	: partno,
+							'idsub' 	: idsub,
+							'action' 	: action
+						};
+						$.ajax({
 							type:"POST",
 							url:base_url+"pengajuan/ProsesInsertPart",
 							dataType:"JSON",
@@ -209,10 +188,32 @@ function TambahBarang(){
 							success:function(data){
 								window.location = base_url+'pengajuan/view_pengajuandt2/'+idsub;
 							}
-				});
-	}
+						});
+					}
+			}
+		});
+	}else{
+		//tidak ada, ok proses simpan
+		$('#btn_simpan').hide();
+		$('#img-load').show();
 
-// end
+		var json_data 	=
+		{
+			'nopengajuan' : nopengajuan,
+				'partno' 	: partno,
+				'idsub' 	: idsub,
+				'action' 	: action
+		};
+		$.ajax({
+			type:"POST",
+			url:base_url+"pengajuan/ProsesInsertPart",
+			dataType:"JSON",
+			data:json_data,
+			success:function(data){
+				window.location = base_url+'pengajuan/view_pengajuandt2/'+idsub;
+			}
+		});
+	}
 
 }
 
@@ -221,13 +222,16 @@ function  DeletePart(idsub,partno){
 	var status =$('#status').val()
 	if(status=='nonactive')
 	{
-		bootbox.alert("<div class='callout callout-danger'><span class='glyphicon glyphicon-exclamation-sign'></span>Tidak Bisa Dihapus</div>",
-			function(result){
-				if(result==true){
-
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;PERINGATAN!!</div>",
+			message: "Tidak bisa Hapus Part <b>"+partno+"</b>,Karena sudah dijadikan PERTEK",
+			// buttons: {
+				OK: {
+					label: '<i class="fa fa-check"></i> Ya',
+					className: 'btn-danger'
 				}
-			}
-		);
+			// },
+		});
 	}else{
 		bootbox.confirm("Anda yakin akan menghapus "+partno+" ?",
 			function(result){

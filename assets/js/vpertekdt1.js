@@ -49,26 +49,25 @@ function setTable(){
 }
 
 // function modalSearch(){
-// 	$('#modal_search').modal('show');
-// }
-//
-// function searchAct(){
-// 	$("#form_search").ajaxSubmit({
-// 		url: base_url+'pengajuan/search_query',
-// 		type: 'post',
-// 		success: function(){
-// 			var table = $('#tb_list').DataTable();
-// 			table.ajax.reload( null, false );
-// 			$('#modal_search').modal('toggle');
-// 			// clearForm();
-// 		}
-// 	});
-// }
+	// 	$('#modal_search').modal('show');
+	// }
+	//
+	// function searchAct(){
+	// 	$("#form_search").ajaxSubmit({
+	// 		url: base_url+'pengajuan/search_query',
+	// 		type: 'post',
+	// 		success: function(){
+	// 			var table = $('#tb_list').DataTable();
+	// 			table.ajax.reload( null, false );
+	// 			$('#modal_search').modal('toggle');
+	// 			// clearForm();
+	// 		}
+	// 	});
+	// }
 
-// function excelData(){
-// 	window.location = base_url+'pengajuan/excel_pengajuan';
+	// function excelData(){
+	// 	window.location = base_url+'pengajuan/excel_pengajuan';
 // }
-
 
 function FormPengajuanBAru()
 {
@@ -160,6 +159,7 @@ function ONprosses(){
 		}
 	);
 }
+
 function AddToPertek(idpengajuan,nopengajuan){
 	var status_pengajuan =$('#status').val()
 	if(status_pengajuan=='nonactive'){

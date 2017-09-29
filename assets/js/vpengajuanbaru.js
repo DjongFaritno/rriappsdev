@@ -56,8 +56,13 @@ function cancelForm(){
 
 function modalAddItem(){
 
+	$('#opt_item').val('-');
+	$('#txt_namakategori').val('');
 	$('#txt_Qty').val('');
+	$('#txt_ukuran').val('');
+	$('#txt_keterangan').val('');
 	$('#modal_add_item').modal('show');
+
 }
 
 function pilihItem(){
@@ -70,11 +75,11 @@ function pilihItem(){
 
 function tambahItem(){
 
-	var item 					= $('#opt_item').val().split('#');
+	var item 				= $('#opt_item').val().split('#');
 	var nama_kategori 		= $('#txt_Nama_kategori').val()
-	var txt_Qty 	= $('#txt_Qty').val()
-	var ukuran 		= $('#txt_ukuran').val()
-	var keterangan 		= $('#txt_keterangan').val()
+	var txt_Qty 			= $('#txt_Qty').val()
+	var ukuran 				= $('#txt_ukuran').val()
+	var keterangan 			= $('#txt_keterangan').val()
 
 	if(item.length==1){
 

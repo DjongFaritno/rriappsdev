@@ -19,7 +19,7 @@ var base_url = "<?php echo base_url(); ?>";
 				<!-- box pertek_hd -->
 			<div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">PERTEK <?php echo '(status : '.$pertekdt1['status'].')'?></h3>
+				  <h3 class="box-title">PERTEK <b><?php echo '(status : '.$pertekdt1['status'].')'?></b></h3>
 				  <div class="btn-group pull-right">
 						<button type="button" class="btn btn-sm btn-default" onclick="BacktopertekDT1()">
 					<i class="glyphicon glyphicon-backward"></i>&nbsp;BACK</button>
@@ -28,7 +28,7 @@ var base_url = "<?php echo base_url(); ?>";
 					<div class="row">
 										<div class="col-md-5">
 												<div class="form-group tight-bottom">
-														<label class="control-label col-md-4">NO Pertek</label>
+														<label class="control-label col-md-4">No Pertek</label>
 														<div class="col-md-5"><?php echo $pertekdt1['nopertek'];?>
 															<input type="hidden" id="txt_id_Pertek" hidden="true" value="<?php echo $pertekdt1['idpertek']?>">
 																		<input type="hidden" id="status" hidden="true" value="<?php echo $pertekdt1['status']?>">

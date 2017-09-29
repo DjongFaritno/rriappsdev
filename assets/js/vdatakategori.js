@@ -6,9 +6,6 @@ $(document).ready(function(){
 
 function setTable(){
 	var my_table = $('#tb_list').DataTable({
-	//   scrollY:'70vh',
-	//   scrollCollapse: true,
-	//   scrollX: true,
 	  processing: true,
 	  serverSide: true,
 	  ordering: false,
@@ -44,11 +41,12 @@ function excelData(){
 
 // code code di add new modal
 function modalAddkategori(){
- clearFormInput();
+ 	clearFormInput();
 	$('#modal_add_kategori').modal('show');
 	$("input[name='kdkategori']").attr('readonly', false);
 	$('#btn_simpan').text('SIMPAN');
 	$("input[name='action']").val('SIMPAN');
+	$('#kdkategori').focus();
 }
 
 function editKeluar(kdkategori){
@@ -62,9 +60,9 @@ function editKeluar(kdkategori){
 
 			var data = $.parseJSON(data);
 
-			$("input[name='kdkategori']").val(data['kd_kategori']);
-			$("input[name='kdkategori']").attr('readonly', true);
-			$("input[name='namakategori']").val(data['nama_kategori']);
+			$('#kdkategori').val(data['kd_kategori']);
+			$('#kdkategori').attr('readonly', true);
+			$('#namakategori').val(data['nama_kategori']);
 			$("input[name='action']").val('PERBAHARUI');
 			// sel.options[sel.selectedIndex].value;
 			$('#btn_simpan').text('PERBAHARUI');
@@ -104,9 +102,9 @@ function clearFormInput(){
 
 function TambahKategori(){
 
-	var kdkategori 				= $("input[name='kdkategori']").val();
-	var namakategori 			= $("input[name='namakategori']").val();
-	var action 						= $("input[name='action']").val();
+	var kdkategori 				= $('#kdkategori').val()
+	var namakategori 			= $('#namakategori').val()
+	var action 					= $('#action').val()
 	//cek textbox yang kosong
 	if(kdkategori=="" || namakategori==""){
 

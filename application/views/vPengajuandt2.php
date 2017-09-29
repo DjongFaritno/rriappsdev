@@ -19,7 +19,7 @@ var base_url = "<?php echo base_url(); ?>";
 				<!-- box pengajuan_hd -->
 			<div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">PENGAJUAN <?php echo '(Status : '.$nopengajuandt1['status'].')'?></h3>
+				  <h3 class="box-title">PENGAJUAN <b><?php echo '(Status : '.$nopengajuandt1['status'].')'?></b></h3>
 				  <div class="btn-group pull-right">
 						<button type="button" class="btn btn-sm btn-default" onclick="BacktoPengajuanDT1()">
 					<i class="glyphicon glyphicon-backward"></i>&nbsp;BACK</button>

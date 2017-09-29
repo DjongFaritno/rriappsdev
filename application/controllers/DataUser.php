@@ -42,10 +42,10 @@ class DataUser extends FNZ_Controller
 					}
 					else
 					{
-						$act = '<a class="btn btn-danger alert-danger btn-xs" href="'.base_url().'datauser/delete_user/'.$data[$i]->username.'"
-						onclick="return confirm(\'anda yakin akan Hapus '.$data[$i]->username.'?\')"><i class="fa fa-fw fa-trash"></i>Hapus</a> ||
-						<a class="btn btn-info alert-info btn-xs  " href="#" onclick="editKeluar(\''.$data[$i]->username.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a> ||
-						<a class="btn bg-navy btn-xs  " href="#" onclick="ResetPassword(\''.$data[$i]->username.'\')"><i class="fa fa-fw fa-edit"></i>Ubah Password</a>';
+						$act = '<a class="btn btn-info alert-info btn-xs" href="#" data-toggle="tooltip" title="Change Data!" onclick="editKeluar(\''.$data[$i]->username.'\')"><i class="fa fa-fw fa-edit"></i></a> ||
+								<a class="btn bg-navy btn-xs" href="#" data-toggle="tooltip" title="Change Password!" onclick="ResetPassword(\''.$data[$i]->username.'\')"><i class="fa fa-fw fa-unlock-alt"></i></a> ||
+								<a class="btn btn-danger alert-danger btn-xs" data-toggle="tooltip" title="Delete Data!" href="'.base_url().'datauser/delete_user/'.$data[$i]->username.'"
+								onclick="return confirm(\'anda yakin akan Hapus '.$data[$i]->username.'?\')"><i class="fa fa-fw fa-trash"></i></a>' ;
 					}
 
 					$records["data"][] = array(
@@ -85,10 +85,10 @@ class DataUser extends FNZ_Controller
 			$data = array(
 
 				'username'				=> $username,
-				'full_name' 		=> $fullname,
-				'privilege' 		=> $privilege,
+				'full_name' 			=> $fullname,
+				'privilege' 			=> $privilege,
 				'email' 				=> $email,
-				'password' 			=> $password,
+				'password' 				=> $password,
 
 				);
 		// 		print ($action);

@@ -42,9 +42,9 @@ class DataSupplier extends FNZ_Controller
 					}
 					else
 					{
-						$act = '<a class="btn btn-danger alert-danger btn-xs" href="'.base_url().'DataSupplier/delete_supplier/'.$data[$i]->kd_supplier.'"
-						onclick="return confirm(\'anda yakin akan Hapus '.$data[$i]->kd_supplier.'?\')"><i class="fa fa-fw fa-trash"></i>Hapus</a> ||
-						<a class="btn btn-info alert-info btn-xs  " href="#" onclick="editKeluar(\''.$data[$i]->kd_supplier.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+						$act = '<a class="btn btn-info alert-info btn-xs" data-toggle="tooltip" title="Change Data!" href="#" onclick="editKeluar(\''.$data[$i]->kd_supplier.'\')"><i class="fa fa-fw fa-edit"></i></a>
+								<a class="btn btn-danger alert-danger btn-xs" data-toggle="tooltip" title="Delete Data!" href="'.base_url().'DataSupplier/delete_supplier/'.$data[$i]->kd_supplier.'"
+								onclick="return confirm(\'anda yakin akan Hapus '.$data[$i]->kd_supplier.'?\')"><i class="fa fa-fw fa-trash"></i></a>';
 					}
 // print $privilege;
 					$records["data"][] = array(

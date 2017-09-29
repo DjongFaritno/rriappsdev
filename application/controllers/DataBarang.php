@@ -38,13 +38,13 @@ class DataBarang extends FNZ_Controller
 						$privilege = $this->session->userdata('logged_in')['priv'];
 						if ($privilege=='OPERATOR')//jika sebagai operator, maka tidak bisa hapus data
 					{
-						$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit " href="#" onclick="editKeluar(\''.$data[$i]->partno.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+						$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit" data-toggle="tooltip" title="Change Data!" href="#" onclick="editKeluar(\''.$data[$i]->partno.'\')"><i class="fa fa-fw fa-edit"></i></a>';
 					}
 					else
 					{
-						$act = '<a class="btn btn-danger alert-danger btn-xs" href="'.base_url().'DataBarang/delete_barang/'.$data[$i]->partno.'"
-						onclick="return confirm(\'anda yakin akan Hapus '.$data[$i]->partno.'?\')"><i class="fa fa-fw fa-trash"></i>Hapus</a> ||
-						<a class="btn btn-info alert-info btn-xs  " href="#" onclick="editKeluar(\''.$data[$i]->partno.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+						$act = '<a class="btn btn-info alert-info btn-xs" data-toggle="tooltip" title="Change Data!" href="#" onclick="editKeluar(\''.$data[$i]->partno.'\')"><i class="fa fa-fw fa-edit"></i></a> 
+								<a class="btn btn-danger alert-danger btn-xs" data-toggle="tooltip" title="Delete Data!" href="'.base_url().'DataBarang/delete_barang/'.$data[$i]->partno.'"
+								onclick="return confirm(\'anda yakin akan Hapus '.$data[$i]->partno.'?\')"><i class="fa fa-fw fa-trash"></i></a>';
 					}
 
 					$records["data"][] = array(
