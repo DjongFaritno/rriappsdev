@@ -45,6 +45,24 @@
              <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
+                    03 Okt. 2017
+                  </span>
+            </li>
+            <!-- /.timeline-label -->
+            <!-- timeline item -->
+            <li>
+            <i class="fa fa-check-square-o bg-green"></i>
+
+              <div class="timeline-item">
+                <h3 class="timeline-header"><a href="#">BETA VERSION 0.6.10</a><!-- --></h3>
+
+                <div class="timeline-body">
+                  -Perbaikan Perhitungan Kuota.
+                  </div>
+                <!-- sampe sini -->
+             <!-- //copy from this -->
+            <li class="time-label">
+                  <span class="bg-black">
                     19 Sep. 2017
                   </span>
             </li>

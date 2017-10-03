@@ -49,7 +49,6 @@ function setTable(){
 }
 
 // function modalSearch(){
-// 	});
 	// 	$('#modal_search').modal('show');
 	// }
 	//

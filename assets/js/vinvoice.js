@@ -49,61 +49,143 @@ function ModalUpload()
 }
 
 function HapusInvoice(idinvoicehd,noinvoice){
-	// bootbox.confirm("Anda yakin akan menghapus "+idinvoicehd+" ?",
-	// 	function(result){
-	// 		if(result==true){
-	//
-	// 			$.post(
-	// 				base_url+"DataBarang/delete_barang/"+idinvoicehd,function(){
-	// 					window.location = base_url+'invoice/';
-	// 				}
-	// 			);
-	// 		}
+	// bootbox.confirm("Yakin Akan Menghapus "+noinvoice+"?",
+	// function(result){
+	// 	if(result==true){
+	// 		$.post(
+	// 			base_url+"invoice/HapusInvoice/"+idinvoicehd,function(){
+	// 				window.location = base_url+'invoice/';
+	// 			}
+	// 		);
 	// 	}
+	// }
+	// );
 
-		bootbox.confirm("Yakin Akan Menghapus "+noinvoice+"?",
-		function(result){
-			if(result==true){
-				$.post(
-					base_url+"invoice/HapusInvoice/"+idinvoicehd,function(){
-						window.location = base_url+'invoice/';
-					}
-				);
+	bootbox.alert({
+		title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ON PROGRESS 😎</div>",
+		message: "<b><font size='30'>WILL BE AVAILABE SOON! 🙏🏻</font></b>",
+		buttons: 
+		{
+			ok: {
+				label: 'OKAY 🤦‍',
+				className: 'btn-danger'
 			}
 		}
-		);
+	})
 
 }
 
-// function BtnUpInvoice()
-// {
-// 	var noinvoice 		= $('#noinvoice').val();
-// 	var tglinvoice 		= $('#tglinvoice').val();
-// 	var file 					= $('#file').val();
-// 	var item 					= $('#opt_item').val().split('#');
-// 	var kd_supplier 	= item[0];
-//
-// 	// window.location = base_url+'invoice/upload/';
-//
-//
-// 		// var title 		= "<span class='fa fa-exclamation-triangle text-warning'></span>&nbsp;Invalid Data";
-// 		// var str_message = "PILIH INVOICE YANG AKAN DI UPLOAD";
-// 		//
-// 		// bootbox.alert({
-// 		// 	size:'small',
-// 		// 	title:title,
-// 		// 	message:str_message,
-// 		// 	buttons:{
-// 		// 		ok:{
-// 		// 			label: 'OK',
-// 		// 			className: 'btn-warning'
-// 		// 		}
-// 		// 	}
-// 		// });
-// 		// return false;
-//
-// }
-//
+function BtnUpInvoice()
+{
+	
+	
+
+	var noinvoice 		= $('#noinvoice').val();
+	var tglinvoice 		= $('#tglinvoice').val();
+	var file 			= $('#file').val();
+	var item 			= $('#opt_item').val().split('#');
+	var kd_supplier 	= item[0];
+
+	// window.location = base_url+'invoice/upload/';
+
+	if(validasi_upload()==true)
+	{
+		bootbox.confirm("Unggah Invoice "+noinvoice+"?",
+		function(result)
+			{	
+				if(result==true)
+				{
+					
+					var iform = $('#form_upload_invoice')[0];
+					var data = new FormData(iform);
+	
+
+						$.ajax({
+							type:"POST",
+							url:base_url+"invoice/upload",
+							type: 'post',
+							enctype: 'multipart/form-data',
+							contentType: false,
+							processData: false,
+							data: data,
+							// dataType:"JSON",
+							// data:json_data,
+							success:function(data){
+
+								bootbox.alert({
+									message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Unggah Data Berhasil.",
+									size: 'small',
+									callback: function () {
+										window.location = base_url+'/invoice/cekkuota';
+									}
+								});
+							}
+						});
+
+					// }
+
+				}
+			}
+		);
+	}
+
+}
+
+function validasi_upload(){
+	if($('#noinvoice').val() == '')
+	{	
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ALERT</div>",
+			message: "<b>No Invoice Masih Kosong</b>",
+			buttons: 
+			{
+				ok: {
+					label: 'TUTUP',
+					className: 'btn-danger'
+				}
+			}
+		})
+		return false();
+
+	}
+
+	if($('#opt_item').val() == '')
+	{	
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ALERT</div>",
+			message: "<b>Kode Supplier Masih Kosong</b>",
+			buttons: 
+			{
+				ok: {
+					label: 'TUTUP',
+					className: 'btn-danger'
+				}
+			}
+		})
+		return false();
+
+	}
+
+	if($('#file').val() == '')
+	{	
+		bootbox.alert({
+			title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ALERT</div>",
+			message: "<b>Tidak Ada File Yang Dipilih</b>",
+			buttons: 
+			{
+				ok: {
+					label: 'TUTUP',
+					className: 'btn-danger'
+				}
+			}
+		})
+		return false();
+
+	}
+
+	return true;
+}
+
 function unduhINVIMPORT()
 {
 	window.location = base_url+'assets/dwn/imp_inv.xls';

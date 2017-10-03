@@ -137,8 +137,9 @@ var base_url = "<?php echo base_url(); ?>";
 						<th style="text-align:center">TOTAL QTY</th>
 						<th style="text-align:center">NO PERTEK</th>
 						<th style="text-align:center">KATEGORI PERTEK</th>
-						<th style="text-align:center">KUOTA</th>
-			      <th style="text-align:center">SISA QUOTA PERTEK</th>
+						<th style="text-align:center">KUOTA AWAL</th>
+						<th style="text-align:center">KUOTA SAAT INI</th>
+			      		<th style="text-align:center">SISA KUOTA</th>
 			     <!-- <th style="width: 40px">Label</th> -->
 			    </tr>
 			  </thead>

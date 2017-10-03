@@ -73,7 +73,8 @@ var base_url = '<?php echo base_url(); ?>';
 <div id="Modal_Upload_Invoice" class="modal fade modal-primary" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">
 	<div class="modal-content">
-		<form action="<?php echo base_url();?>invoice/upload/" method="post" enctype="multipart/form-data">
+		<!-- <form action="<?php echo base_url();?>invoice/upload/" method="post" enctype="multipart/form-data"> -->
+		<form action=""  id="form_upload_invoice">
 		<div class="modal-header">
 		<h4 class="modal-title"><?php echo $modaltitle; ?></h4>
 		</div>
@@ -110,7 +111,8 @@ var base_url = '<?php echo base_url(); ?>';
 		</div>
 		<div class="modal-footer">
 		<button type="button" class="btn btn-default pull-left" data-dismiss="modal">BATAL</button>
-		<button type="submit" id="btn_UpInvoice" class="btn btn-primary">
+		<button type="button" onclick="BtnUpInvoice()" id="btn_UpInvoice" class="btn btn-primary">
+		<!-- <button type="submit" id="btn_UpInvoice" class="btn btn-primary"> -->
 			<i class="glyphicon glyphicon-floppy-disk"></i>UNGGAH
 		</button>
 		<img id="img-load" style="display:none" src="<?php echo base_url(); ?>assets/images/fb-loader.gif" />

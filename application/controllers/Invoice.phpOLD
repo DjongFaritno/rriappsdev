@@ -98,25 +98,20 @@ class Invoice extends FNZ_Controller
 
   function upload()
   {
-    $noinvoice  	                = $this->input->post('noinvoice');
-    
-    $user                         = $this->session->userdata('logged_in')['uid'];
-    $item 			                  = $this->input->post('opt_item');
-    $idetail                      = explode('#',$item);
-    // $file  	                  = $this->input->post('file');
-    $tgl_pengajuan		            = $this->input->post('tglinvoice');
-   
-		// $tgl 		    	            = date_parse_from_format("d/m/Y", $tgl);
-		// $tgl_pengajuan             = $tgl['year'].'/'.$tgl['month'].'/'.$tgl['day'];
-    $fileName                     = time().$_FILES['file']['name'];
-     
-    // var_dump($fileName);
-    //  exit();
-     // $fileName                  = $this->input->post('file', TRUE);
-    $config['upload_path']        = './assets/invoices/';//nama folder
-    $config['file_name']          = $fileName;
-    $config['allowed_types']      = 'xls|xlsx|csv';
-    $config['max_size']           = 10000;
+    $noinvoice  	= $this->input->post('noinvoice');
+    $user = $this->session->userdata('logged_in')['uid'];
+    $item 			= $this->input->post('opt_item');
+    $idetail = explode('#',$item);
+    // $file  	= $this->input->post('file');
+    $tgl_pengajuan			= $this->input->post('tglinvoice');
+		// $tgl 			= date_parse_from_format("d/m/Y", $tgl);
+		// $tgl_pengajuan 	= $tgl['year'].'/'.$tgl['month'].'/'.$tgl['day'];
+    $fileName = time().$_FILES['file']['name'];
+    // $fileName = $this->input->post('file', TRUE);
+    $config['upload_path'] = './assets/invoices/';//nama folder
+    $config['file_name'] = $fileName;
+    $config['allowed_types'] = 'xls|xlsx|csv';
+    $config['max_size'] = 10000;
 
     //  $this->load->library('upload');
     $this->load->library('upload', $config);
@@ -178,7 +173,7 @@ class Invoice extends FNZ_Controller
     //  return FALSE;
     $this->session->set_flashdata('msg','Berhasil upload ...!!');
     unlink($inputFileName);
-    // redirect('invoice/cekkuota/');
+    redirect('invoice/cekkuota/');
   }
 
   function cekkuota()
@@ -237,38 +232,37 @@ class Invoice extends FNZ_Controller
 
         if($data[$i]->nopertek !="")
         {
-            $partno = '<div align="center" style="width: 100%">'.$data[$i]->partno.'</div>';
-            $qty = '<div align="center" style="width: 100%">'.number_format($data[$i]->qty, 0, '.', ',').'</div>';
-            $sisa_kuota = '<div align="center" style="width: 100%">'.number_format($data[$i]->sisa_kuota, 0, '.', ',').'</div>';
-            $nopertek = '<div align="center" style="width: 100%">'.$data[$i]->nopertek.'</div>';
-            $kategori = '<div align="center" style="width: 100%">'.$data[$i]->kd_kategori.'</div>';
-            $persen =  ($qtykirim / $data[$i]->sisa_kuota) * 100;
-            // $kuota = $data[$i]->kuota;
-            
-            if((int)$data[$i]->sisa_kuota > (int)$qtykirim)
-            {
-              $kuota = '<div class="progress"><div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
-            }
-            // else
-            // {
-            //   $kuota = '<div class="progress"><div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
-            // }           
+          $partno = '<div align="center" style="width: 100%">'.$data[$i]->partno.'</div>';
+          $qty = '<div align="center" style="width: 100%">'.number_format($data[$i]->qty, 0, '.', ',').'</div>';
+          $nopertek = '<div align="center" style="width: 100%">'.$data[$i]->nopertek.'</div>';
+          $kategori = '<div align="center" style="width: 100%">'.$data[$i]->kd_kategori.'</div>';
+          $persen =  ($qtykirim / $data[$i]->kuota) * 100;
+          // $kuota = $data[$i]->kuota;
+          
+          if((int)$data[$i]->kuota == (int)$qtykirim)
+          {
+            $kuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
+          }
+          else
+          {
+            $kuota = '<div class="progress"><div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
+          }
 
-            if((int)$data[$i]->sisa_kuota < (int)$qtykirim)
-            {
-              $kuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:100%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
-              $sisakuota = (int)$data[$i]->sisa_kuota - (int)$qtykirim;
-              $sisakuota = number_format($sisakuota, 0, '.', ',');
-              $sisakuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width:100%">'.$sisakuota.'</div></div>';
-            }
-            else
-            {
-              $sisakuota = (int)$data[$i]->sisa_kuota - (int)$qtykirim;
-              $sisakuota = '<div align="center">'.number_format($sisakuota, 0, '.', ',').'</div>';
-            }
+          $totalkuotakirim = $qtykirim;
+          $totalkuotakirim = '<div align="center" style="width: 100%">'.number_format($totalkuotakirim, 0, '.', ',').'</div>';
 
-            $totalkuotakirim = $qtykirim;
-            $totalkuotakirim = '<div align="center" style="width: 100%">'.number_format($totalkuotakirim, 0, '.', ',').'</div>';
+          if((int)$data[$i]->kuota < (int)$qtykirim)
+          {
+            $kuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
+            $sisakuota = (int)$data[$i]->kuota - (int)$qtykirim;
+            $sisakuota = number_format($sisakuota, 0, '.', ',');
+            $sisakuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width:100%">'.$sisakuota.'</div></div>';
+          }
+          else
+          {
+            $sisakuota = (int)$data[$i]->kuota - (int)$qtykirim;
+            $sisakuota = '<div align="center">'.number_format($sisakuota, 0, '.', ',').'</div>';
+          }
 
         }
         else
@@ -278,7 +272,6 @@ class Invoice extends FNZ_Controller
           $nopertek ='<div class="progress-bar progress-bar-blue" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%">PART TIDAK ADA DI PERTEK AKTIF</div></div>';
           $kategori = '<div align="center" style="width: 100%">-</div>';
           $kuota = '<div align="center" style="width: 100%">-</div>';
-          $sisa_kuota = '<div align="center" style="width: 100%">-</div>';
           $totalkuotakirim = '<div align="center" style="width: 100%">-</div>';
           $sisakuota = '<div align="center" style="width: 100%">-</div>';
         }
@@ -290,7 +283,6 @@ class Invoice extends FNZ_Controller
           $nopertek,
           $kategori,
           $kuota,
-          $sisa_kuota,
           $sisakuota
         );
       }
@@ -353,7 +345,7 @@ class Invoice extends FNZ_Controller
         $data_pertek  = $this->minvoice->get_datapertek($id_sub,$noinvoice,$user);
         
         $sisakuota    = $data_pertek['sisa'];
-        // var_dump($sisakuota);
+        // var_dump($pertekdt2);
         // exit();
 
         $this->minvoice->udpate_kuotapertek($id_sub,$sisakuota);

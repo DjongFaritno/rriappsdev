@@ -178,6 +178,8 @@ class Pertek extends FNZ_Controller
 			// print($nopengajuan);
 			$user = $this->session->userdata('logged_in')['uid'];
 			$data = $this->mpertek->get_list_datapertekdt1($user,'pertekdt1',$nopertek);
+			// var_dump($data);
+			// exit();
 			$iTotalRecords  	= count($data);
 			$iDisplayLength 	= intval($_REQUEST['length']);
 			$iDisplayLength 	= $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;

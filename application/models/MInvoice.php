@@ -87,6 +87,7 @@ class MInvoice extends CI_Model
 		$data=$this->db->query("SELECT eimporthd.idinvoicehd, eimporthd.noinvoice, eimporthd.tglinvoice, eimporthd.kd_supplier, ms_supplier.nama_supplier
 														from eimporthd join ms_supplier on ms_supplier.kd_supplier = eimporthd.kd_supplier WHERE eimporthd.userid='$user'"
 													)->row_array();
+													
 		return $data;
 	}
 
@@ -109,7 +110,7 @@ class MInvoice extends CI_Model
 
 			$this->db->select('eimportdt.noinvoice, eimportdt.partno, eimportdt.qty,
 			pertek_dt2.nopertek,pertek_dt1.kd_kategori,
-			pertek_dt2.id_sub, pertek_dt1.kuota,  pertek_hd.status');
+			pertek_dt2.id_sub, pertek_dt1.kuota, pertek_dt1.sisa_kuota,  pertek_hd.status');
 			$this->db->from('eimportdt');
 			$this->db->join('pertek_dt2', 'pertek_dt2.partno = eimportdt.partno', 'left');
 			$this->db->join('pertek_dt1', 'pertek_dt1.id_sub = pertek_dt2.id_sub', 'left');
@@ -119,6 +120,8 @@ class MInvoice extends CI_Model
 			$this->db->where('noinvoice',$noinvoice);
 			$this->db->where('status','active');
 			$this->db->or_where('status',null);
+			// echo $this->db->last_query();
+			// 										exit();
 			return $this->db->get()->result();
 
 			//query yang akan digunakan untuk export ke excel
@@ -135,9 +138,11 @@ class MInvoice extends CI_Model
 	{
 			$sql = "SELECT SUM(eimportdt.`qty`) AS qtykirim
 			FROM eimportdt
-			LEFT JOIN pengajuan_dt2 ON pengajuan_dt2.`partno` = eimportdt.`partno`
-			WHERE pengajuan_dt2.id_sub = '$id_sub'
+			LEFT JOIN pertek_dt2 ON pertek_dt2.`partno` = eimportdt.`partno`
+			WHERE pertek_dt2.id_sub = '$id_sub'
 			AND eimportdt.noinvoice ='$noinvoice'";
+			// echo $sql;
+			// exit();
 			return $this->db->query($sql)->row();
 	}
 
@@ -159,6 +164,13 @@ class MInvoice extends CI_Model
 			WHERE eimportdt.noinvoice = '$noinvoice' AND pertek_hd.status ='active' OR pertek_hd.status ='null'");
 		return $data;
 	}
+
+	function udpate_kuotapertek($id_sub,$sisakuota)
+	{
+		$data = $this->db->query ("UPDATE pertek_dt1 set sisa_kuota ='$sisakuota' WHERE id_sub = '$id_sub'");
+		return $data;
+	}
+
 
 	// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Modul View invoice DT
 
@@ -217,5 +229,35 @@ class MInvoice extends CI_Model
 			return $this->db->query($query)->result();
 		}
 	}
+
+	function get_jumlahpertek($noinvoice,$user)
+	{
+		$data = array();
+		$data=$this->db->query("SELECT DISTINCT pertek_dt2.id_sub, pertek_dt2.nopertek FROM eimportdt
+													INNER JOIN eimporthd ON eimporthd.noinvoice = eimportdt.noinvoice
+													LEFT JOIN pertek_dt2 ON pertek_dt2.partno = eimportdt.partno
+													WHERE eimportdt.noinvoice ='$noinvoice'
+													AND eimporthd.`userid` ='$user'")->result_array();
+								// echo $this->db->last_query();
+								// exit();
+		return $data;
+	}
+
+	function get_datapertek($id_sub,$noinvoice,$user)
+	{
+		$data = array();
+		$data=$this->db->query("SELECT pertek_dt2.id_sub, pertek_dt2.nopertek ,pertek_dt1.kuota, SUM(eimportdt.qty)  AS total_kirim, pertek_dt1.sisa_kuota- SUM(eimportdt.qty) AS sisa
+														FROM eimportdt
+														INNER JOIN eimporthd ON eimporthd.noinvoice = eimportdt.noinvoice
+														LEFT JOIN pertek_dt2 ON pertek_dt2.partno = eimportdt.partno
+														INNER JOIN pertek_dt1 ON pertek_dt1.id_sub = pertek_dt2.id_sub
+														WHERE pertek_dt2.id_sub = '$id_sub'
+														AND eimportdt.noinvoice ='$noinvoice'
+														AND eimporthd.`userid` ='$user'")->row_array();
+								// echo $this->db->last_query();
+								// exit();
+		return $data;
+	}
+
 
 }

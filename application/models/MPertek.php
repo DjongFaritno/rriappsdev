@@ -194,6 +194,8 @@ class MPertek extends CI_Model {
 			$this->db->join('ms_kategori','ms_kategori.kd_kategori = pertek_dt1.kd_kategori');
 			$this->db->order_by('kd_kategori','asc');
 			$this->db->where('nopertek',$nopertek);
+			// echo $this->db->last_query();
+			// 					exit();
 			return $this->db->get()->result();
 
 			//query yang akan digunakan untuk export ke excel
