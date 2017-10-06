@@ -44,6 +44,7 @@ class Pertek extends FNZ_Controller
 			{
 				$act = '<a class="btn btn-success"  href="#" data-toggle="tooltip" title="View Data!" onclick="ViewDt1(\''.$data[$i]->idpertek.'\')"><i class="fa fa-fw fa-file-text"></i></a>
 				<a class="btn btn-danger"  href="#" data-toggle="tooltip" title="Delete Data!" onclick="DeletePertek(\''.$data[$i]->idpertek.'\',\''.$data[$i]->nopertek.'\')"><i class="fa fa-fw fa-trash"></i></a>';
+				
 			}
 			$records["data"][] = array(
 			$data[$i]->nopertek,
@@ -196,11 +197,15 @@ class Pertek extends FNZ_Controller
 
 				if ($privilege=='OPERATOR')//jika sebagai operator, maka tidak bisa hapus data
 				{
-					$act = '- || <a class="btn btn-info alert-info btn-xs fa-edit " href="#" onclick="editKeluar(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-edit"></i>Ubah</a>';
+					$act = '<a class="btn btn-success"  href="#" data-toggle="tooltip" title="View Data!" onclick="ViewDt2(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-file-text"></i></a>
+					<a class="btn btn-danger"  href="#" data-toggle="tooltip" title="Delete Data!" onclick="view_pertekinvoice(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-trash"></i></a>';
 				}
 				else
 				{
-					$act = '<a class="btn btn-info alert-info btn-xs  " href="#" onclick="ViewDt2(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-file-text"></i>List Part</a>';
+					// $act = '<a class="btn btn-info alert-info btn-xs  " href="#" onclick="ViewDt2(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-file-text"></i>List Part</a>';
+					
+					$act = '<a class="btn btn-success"  href="#" data-toggle="tooltip" title="View Data!" onclick="ViewDt2(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw fa-file-text"></i></a>
+					<a class="btn btn-info"  href="#" data-toggle="tooltip" title="View Data Invoice!" onclick="view_pertekinvoice(\''.$data[$i]->id_sub.'\')"><i class="fa fa-fw  fa-list"></i></a>';
 				}
 
 				// print $privilege;
@@ -233,11 +238,11 @@ class Pertek extends FNZ_Controller
 		//get data kategori
 		$kategori = $this->mpertek->get_barang()->result();
 
-		$vdata['opt_item'][NULL] = '-';
-		foreach ($kategori as $b) {
-			$vdata['opt_item'][$b->partno."#".$b->uraian_barang."#".$b->nohs."#".$b->satuan]
-			=$b->partno." | ".$b->uraian_barang;
-		}
+		// $vdata['opt_item'][NULL] = '-';
+		// foreach ($kategori as $b) {
+		// 	$vdata['opt_item'][$b->partno."#".$b->uraian_barang."#".$b->nohs."#".$b->satuan]
+		// 	=$b->partno." | ".$b->uraian_barang;
+		// }
 
 		$vdata['title'] = 'PERTEK DT1';
 		$vdata['titledt'] = 'LIST PART BARANG';
@@ -271,6 +276,116 @@ class Pertek extends FNZ_Controller
 				$data[$i]->satuan
 				// 	$act
 			);
+		}
+
+		$records["draw"]            	= $sEcho;
+		$records["recordsTotal"]    	= $iTotalRecords;
+		$records["recordsFiltered"] 	= $iTotalRecords;
+		echo json_encode($records);
+	}
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::pertekinvoice
+	function view_pertekinvoice($idsub)
+	{
+		$vdata['pertekdt1']=$this->mpertek->get_nopertekdt1($idsub);
+
+		//get data kategori
+		$kategori = $this->mpertek->get_barang()->result();
+
+		// $vdata['opt_item'][NULL] = '-';
+		// foreach ($kategori as $b) {
+		// 	$vdata['opt_item'][$b->partno."#".$b->uraian_barang."#".$b->nohs."#".$b->satuan]
+		// 	=$b->partno." | ".$b->uraian_barang;
+		// }
+
+		$vdata['title'] = 'PERTEK INVOICE';
+		$vdata['titledt'] = 'LIST PART BARANG';
+		$vdata['titleinvoice'] = 'LIST INVOICE';
+		$data['content'] = $this->load->view('vPertekinvoice',$vdata,TRUE);
+
+		$this->load->view('main',$data);
+
+	}
+
+	function loaddatatablepartinvoice($idsub)
+	{
+		// print($nopengajuan);
+		$user = $this->session->userdata('logged_in')['uid'];
+		$data = $this->mpertek->get_list_datadt2($user,'pengajuandt2',$idsub);
+		$iTotalRecords  	= count($data);
+		$iDisplayLength 	= intval($_REQUEST['length']);
+		$iDisplayLength 	= $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+		$iDisplayStart  	= intval($_REQUEST['start']);
+		$sEcho				= intval($_REQUEST['draw']);
+		$records            = array();
+		$records["data"]    = array();
+		$end = $iDisplayStart + $iDisplayLength;
+		$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+		$fdate = 'd-M-Y';
+		for($i = $iDisplayStart; $i < $end; $i++)
+		{
+			$records["data"][] = array(
+				// $data[$i]->id_sub,
+				$data[$i]->partno,
+				$data[$i]->uraian_barang,
+				$data[$i]->satuan
+				// 	$act
+			);
+		}
+
+		$records["draw"]            	= $sEcho;
+		$records["recordsTotal"]    	= $iTotalRecords;
+		$records["recordsFiltered"] 	= $iTotalRecords;
+		echo json_encode($records);
+	}
+
+	function loaddatatablepertekinvoice($idpertek,$kd_kategori)
+	{
+		// print($nopengajuan);
+		
+		$pertekHD =$this->mpertek->get_nopertekHD($idpertek);		
+		$nopertek = $pertekHD['nopertek'];
+		// var_dump($nopertek);
+		// exit();
+		$user = $this->session->userdata('logged_in')['uid'];
+		$data = $this->mpertek->get_list_invoice($user,'pengajuandt2',$nopertek,$kd_kategori);
+		$iTotalRecords  	= count($data);
+		$iDisplayLength 	= intval($_REQUEST['length']);
+		$iDisplayLength 	= $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+		$iDisplayStart  	= intval($_REQUEST['start']);
+		$sEcho				= intval($_REQUEST['draw']);
+		$records            = array();
+		$records["data"]    = array();
+		$end = $iDisplayStart + $iDisplayLength;
+		$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+		$fdate = 'd-M-Y';
+		$kuota_awal = '0';
+		for($i = $iDisplayStart; $i < $end; $i++)
+		{
+			if($kuota_awal ==0)
+			{
+				$kuota_awal= $data[$i]->kuota;
+			}
+			else
+			{
+				$kuota_awal = $kuota_awal;
+			}
+			// $kuota_awal = $data[$i]->kuota;
+			$kuota_awal = $kuota_awal - $data[$i]->qty;
+			
+			$records["data"][] = array(
+				// $data[$i]->id_sub,
+				$data[$i]->noinvoice,
+				$data[$i]->tgl_invoice,
+				$data[$i]->nama_supplier,
+				$data[$i]->partno,
+				$data[$i]->uraian_barang,
+				// $data[$i]->kuota,
+				$data[$i]->qty,
+				$kuota_awal
+				// 	$act
+			);
+			$kuota_awal = $kuota_awal;
 		}
 
 		$records["draw"]            	= $sEcho;

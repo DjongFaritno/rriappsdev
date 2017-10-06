@@ -465,13 +465,6 @@ class Pengajuan extends FNZ_Controller
 		$data = $this->mpengajuan->cekbarang($partno);
 		echo json_encode($data);
 	}
-	// function cekduplicatepart($idsub,$partno)
-	// {
-	// 	$partno = urldecode($partno);
-	// 	$idsub = urldecode($idsub);
-	// 	$data = $this->mpengajuan->cekbarang($idsub,$partno);
-	// 	echo json_encode($data);
-	// }
 
 	function ProsesInsertPart()
 	{

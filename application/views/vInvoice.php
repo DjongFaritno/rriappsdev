@@ -34,7 +34,7 @@ var base_url = '<?php echo base_url(); ?>';
 	                  <i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;</button>
 
 	                  </div>
-										<img id="img-load" style="display:none" src="<?php echo base_url(); ?>assets/images/fb-loader.gif" />
+										<!-- <img id="img-load" style="display:none" src="<?php echo base_url(); ?>assets/images/fb-loader.gif" /> -->
 									</div>
 				</div><!-- /.box-header -->
 				<div class="box-body">

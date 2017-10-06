@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo"><i class="fa fa-fw fa-ship"></i>
-    <a href="#"><b>RRI</b>&nbsp;APP&nbsp;<b><h5>BETA VERSION</h5></b></a>
+    <a href="#"><b>RRI</b>&nbsp;APP&nbsp;<b><h5><strike>BETA VERSION</strike></h5></b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

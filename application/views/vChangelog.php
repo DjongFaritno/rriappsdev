@@ -45,6 +45,42 @@
              <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
+                    06 Okt. 2017
+                  </span>
+            </li>
+            <!-- /.timeline-label -->
+            <!-- timeline item -->
+            <li>
+            <i class="fa fa-check-square-o bg-green"></i>
+
+              <div class="timeline-item">
+                <h3 class="timeline-header"><a href="#">VERSION 1.1</a><!-- --></h3>
+
+                <div class="timeline-body">
+                  -Penambahan Fungsi Hapus Invoice & Perhitungan ulang sisa kuota.
+                  </div>
+                <!-- sampe sini -->
+             <!-- //copy from this -->
+            <li class="time-label">
+                  <span class="bg-black">
+                    05 Okt. 2017
+                  </span>
+            </li>
+            <!-- /.timeline-label -->
+            <!-- timeline item -->
+            <li>
+            <i class="fa fa-check bg-red"></i>
+
+              <div class="timeline-item">
+                <h3 class="timeline-header"><a href="#">VERSION 1.0</a><!-- --></h3>
+
+                <div class="timeline-body">
+                  -Penambahan Histori Invoice di Kategori Pertek.
+                  </div>
+                <!-- sampe sini -->
+             <!-- //copy from this -->
+            <li class="time-label">
+                  <span class="bg-black">
                     03 Okt. 2017
                   </span>
             </li>

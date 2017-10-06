@@ -60,9 +60,12 @@ class Invoice extends FNZ_Controller
       }
       else
       {
-        $act = '<a class="btn btn-danger alert-danger btn-xs" href="#" onclick="HapusInvoice(\''.$data[$i]->idinvoicehd.'\',\''.$data[$i]->noinvoice.'\')"><i class="fa fa-fw fa-trash"></i>Hapus</a>';
+        // $act = '<a class="btn btn-danger alert-danger btn-xs" href="#" onclick="HapusInvoice(\''.$data[$i]->idinvoicehd.'\',\''.$data[$i]->noinvoice.'\')"><i class="fa fa-fw fa-trash"></i>Hapus</a>';
+        $act = '<a class="btn btn-success"  href="#" data-toggle="tooltip" title="View Data!"onclick="VinvoiceDT(\''.$data[$i]->idinvoicehd.'\',\''.$data[$i]->noinvoice.'\')"><i class="fa fa-fw fa-file-text"></i></a>
+        <a class="btn btn-danger"  href="#" data-toggle="tooltip" title="Delete Data!" onclick="HapusInvoice(\''.$data[$i]->idinvoicehd.'\',\''.$data[$i]->noinvoice.'\')"><i class="fa fa-fw fa-trash"></i></a>';
       }
-      $noinvoice = '<i class="fa fa-fw fa-file-text"></i><a href="#" onclick="VinvoiceDT(\''.$data[$i]->idinvoicehd.'\',\''.$data[$i]->noinvoice.'\')">'.$data[$i]->noinvoice.'</a>';
+      // $noinvoice = '<i class="fa fa-fw fa-file-text"></i><a href="#" onclick="VinvoiceDT(\''.$data[$i]->idinvoicehd.'\',\''.$data[$i]->noinvoice.'\')">'.$data[$i]->noinvoice.'</a>';
+      $noinvoice = $data[$i]->noinvoice;
       $supplier = $data[$i]->kd_supplier.'-'.$data[$i]->nama_supplier;
       
       $records["data"][] = array(
@@ -361,6 +364,40 @@ class Invoice extends FNZ_Controller
       }
     
     echo "true";
+  }
+
+  function delete_invoice($idinvoicehd){
+    $noinvoice = $this->minvoice->get_invoiceHD($idinvoicehd);
+    
+    if($noinvoice != null)
+    {
+      $noinvoice = $noinvoice->noinvoice;
+      $count_pertek = $this->minvoice->get_jumlahinvoice($idinvoicehd);
+      $row          = $count_pertek;
+      $ilength      = count($row);
+
+        for($i=0;$i<$ilength;$i++)
+        {
+          $id_sub = $row[$i]['id_sub'];
+
+          $data_pertek  = $this->minvoice->get_invoice($id_sub,$noinvoice);
+          
+          $sisakuota    = $data_pertek['sisa'];
+          // var_dump($sisakuota);
+          // exit();
+
+          $this->minvoice->udpate_kuotapertek($id_sub,$sisakuota);
+          
+        }
+      
+      echo "true";
+
+       //save header
+      $this->minvoice->del_invoicehd($idinvoicehd);
+      //save DT
+      $this->minvoice->del_invoicedt($noinvoice);
+
+    }
   }
 
 //----------------------------------------------------------form view Invoice Detail

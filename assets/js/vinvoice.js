@@ -42,43 +42,58 @@ function pilihItem(){
 
 	$('#txt_Nama_Supplier').val($item[1]);
 }
-function ModalUpload()
-{
+
+function ModalUpload(){
   $("input[name='file']").val('');
   $('#Modal_Upload_Invoice').modal('show');
 }
 
 function HapusInvoice(idinvoicehd,noinvoice){
-	// bootbox.confirm("Yakin Akan Menghapus "+noinvoice+"?",
-	// function(result){
-	// 	if(result==true){
-	// 		$.post(
-	// 			base_url+"invoice/HapusInvoice/"+idinvoicehd,function(){
-	// 				window.location = base_url+'invoice/';
-	// 			}
-	// 		);
-	// 	}
-	// }
-	// );
-
-	bootbox.alert({
-		title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ON PROGRESS 😎</div>",
-		message: "<b><font size='30'>WILL BE AVAILABE SOON! 🙏🏻</font></b>",
-		buttons: 
+	// onprosses();
+	bootbox.confirm({
+		title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;KONFIRMASI</div>",
+		message: "<b>Yakin Akan Menghapus "+noinvoice+"</b>",
+		buttons:
 		{
-			ok: {
-				label: 'OKAY 🤦‍',
+			cancel: {
+				label: '<i class="fa fa-times"></i> Tidak',
+				className: 'btn-success'
+			},
+			confirm: {
+				label: '<i class="fa fa-check"></i> Ya',
 				className: 'btn-danger'
 			}
+		},
+		callback: function(result){
+			if (result==true){
+				var str_url  	= encodeURI(base_url+"invoice/delete_invoice/"+idinvoicehd);
+				
+				$.ajax({
+
+					type:"POST",
+					url:str_url,
+					dataType:"html",
+					success:function(data)
+					{
+						bootbox.alert({
+							message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Hapus Data Berhasil.",
+							size: 'small',
+							callback: function () {
+
+								window.location = base_url+'/invoice';
+							}
+						});
+					}
+				})
+			}
 		}
+		
 	})
+
 
 }
 
-function BtnUpInvoice()
-{
-	
-	
+function BtnUpInvoice(){
 
 	var noinvoice 		= $('#noinvoice').val();
 	var tglinvoice 		= $('#tglinvoice').val();
@@ -87,6 +102,8 @@ function BtnUpInvoice()
 	var kd_supplier 	= item[0];
 
 	// window.location = base_url+'invoice/upload/';
+	$('#btn_UpInvoice').hide();
+	$('#img-load').show();
 
 	if(validasi_upload()==true)
 	{
@@ -124,6 +141,11 @@ function BtnUpInvoice()
 
 					// }
 
+				}
+				else
+				{
+					$('#btn_UpInvoice').show();
+					$('#img-load').hide();
 				}
 			}
 		);
@@ -189,4 +211,18 @@ function validasi_upload(){
 function unduhINVIMPORT()
 {
 	window.location = base_url+'assets/dwn/imp_inv.xls';
+}
+
+function onprosses(){
+		bootbox.alert({
+		title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ON PROGRESS 😎</div>",
+		message: "<b><font size='30'>WILL BE AVAILABE SOON! 🙏🏻</font></b>",
+		buttons: 
+		{
+			ok: {
+				label: 'OKAY 🤦‍',
+				className: 'btn-danger'
+			}
+		}
+	})
 }

@@ -29,6 +29,7 @@ function setTable(){
 	  processing: true,
 	  serverSide: true,
 	  ordering: false,
+	  paging: false,
 	  ajax: base_url+"pengajuan/loaddatatablepart/"+idsub,
 	  fixedColumns:{
 		  leftColumns: 0

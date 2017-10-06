@@ -29,9 +29,6 @@ var base_url = "<?php echo base_url(); ?>";
 						  <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Simpan</button>
             	<!-- </div> -->
 				</div>
-				<!-- <br>
-				<br>
-				<br> -->
 				<div class="box-body">
 					<div class="row">
 										<div class="col-md-5">

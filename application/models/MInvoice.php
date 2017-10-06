@@ -6,10 +6,9 @@ class MInvoice extends CI_Model
 
 	public function __construct()
 	{
-
-        // Call the CI_Model constructor
-        parent::__construct();
-  }
+		// Call the CI_Model constructor
+		parent::__construct();
+	}
 
 	function get_list_data($user,$menu)
 	{
@@ -258,6 +257,47 @@ class MInvoice extends CI_Model
 								// exit();
 		return $data;
 	}
+
+	function get_jumlahinvoice($idinvoicehd)
+	{
+		$data = array();
+		$data=$this->db->query("SELECT DISTINCT pertek_dt2.id_sub, pertek_dt2.nopertek 
+								FROM invoice_dt
+								INNER JOIN invoice_hd ON invoice_hd.noinvoice = invoice_dt.noinvoice
+								LEFT JOIN pertek_dt2 ON pertek_dt2.partno = invoice_dt.partno
+								WHERE invoice_hd.idinvoicehd ='$idinvoicehd'")->result_array();
+								// echo $this->db->last_query();
+								// exit();
+		return $data;
+	}
+
+	function get_invoice($id_sub,$noinvoice)
+	{
+		$data = array();
+		$data=$this->db->query("SELECT pertek_dt2.id_sub, pertek_dt2.nopertek ,pertek_dt1.kuota, SUM(invoice_dt.qty)  AS total_kirim, pertek_dt1.sisa_kuota + SUM(invoice_dt.qty) AS sisa
+								FROM invoice_dt
+								INNER JOIN invoice_hd ON invoice_hd.noinvoice = invoice_dt.noinvoice
+								LEFT JOIN pertek_dt2 ON pertek_dt2.partno = invoice_dt.partno
+								INNER JOIN pertek_dt1 ON pertek_dt1.id_sub = pertek_dt2.id_sub
+								WHERE pertek_dt2.id_sub = '$id_sub'
+								AND invoice_dt.noinvoice ='$noinvoice'")->row_array();
+								// echo $this->db->last_query();
+								// exit();
+		return $data;
+	}
+
+	function del_invoicehd($idinvoicehd)
+	{
+		$this->db->where('idinvoicehd',$idinvoicehd);
+		$this->db->delete("invoice_hd");
+	}
+
+	function del_invoicedt($noinvoice)
+	{
+		$this->db->where('noinvoice',$noinvoice);
+		$this->db->delete("invoice_dt");
+	}
+
 
 
 }

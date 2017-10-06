@@ -39,6 +39,7 @@ function setTable(){
 	  processing: true,
 	  serverSide: true,
 	  ordering: false,
+	  paging: false,
 	  ajax: base_url+"pertek/loaddatatableviewdt1/"+idpertek,
 	  fixedColumns:{
 		  leftColumns: 0
@@ -122,6 +123,10 @@ function ViewDt2(id_sub){
 	// );
 }
 
+function view_pertekinvoice(id_sub){
+			window.location = base_url+'pertek/view_pertekinvoice/'+id_sub;
+}
+
 function DeletePengajuan(idsub,nopengajuan,kd_kategori){
 	var status =$('#status').val()
 	if(status=='nonactive')
@@ -160,24 +165,24 @@ function ONprosses(){
 	);
 }
 
-function AddToPertek(idpengajuan,nopengajuan){
-	var status_pengajuan =$('#status').val()
-	if(status_pengajuan=='nonactive'){
-		bootbox.alert("<div class='callout callout-danger'><span class='glyphicon glyphicon-exclamation-sign'></span> NO PENGAJUAN "+nopengajuan+" SUDAH DI JADIKAN PERTEK </div>"
-			// function(result){
-			// 	if(result==true){
-			//
-			// 	}
-			// }
-		);
+// function AddToPertek(idpengajuan,nopengajuan){
+// 	var status_pengajuan =$('#status').val()
+// 	if(status_pengajuan=='nonactive'){
+// 		bootbox.alert("<div class='callout callout-danger'><span class='glyphicon glyphicon-exclamation-sign'></span> NO PENGAJUAN "+nopengajuan+" SUDAH DI JADIKAN PERTEK </div>"
+// 			// function(result){
+// 			// 	if(result==true){
+// 			//
+// 			// 	}
+// 			// }
+// 		);
 
-	}else{
-	bootbox.confirm("Anda yakin akan membuat PERTEK dari no pengajuan  "+nopengajuan+" ?",
-	function(result){
-		if(result==true){
-			window.location = base_url+'pertek/newpertek/'+idpengajuan;
-		}
-	}
-	);
-}
-}
+// 	}else{
+// 	bootbox.confirm("Anda yakin akan membuat PERTEK dari no pengajuan  "+nopengajuan+" ?",
+// 	function(result){
+// 		if(result==true){
+// 			window.location = base_url+'pertek/newpertek/'+idpengajuan;
+// 		}
+// 	}
+// 	);
+// }
+// }

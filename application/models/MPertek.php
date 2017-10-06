@@ -247,4 +247,39 @@ class MPertek extends CI_Model {
 		}
 	}
 
+	function get_list_invoice($user,$menu,$nopertek,$kd_kategori)
+	{
+
+		// var_dump($idsub);
+		// exit();
+		$this->db->where('user',$user);
+		$this->db->where('menu',$menu);
+		$data = $this->db->get('query')->row();
+		if($data==null)
+		{ //data null = pertama kali load page
+
+			$this->db->select('invoice_hd.noinvoice, invoice_hd.tgl_invoice, ms_supplier.nama_supplier, invoice_dt.partno, ms_barang.uraian_barang, invoice_dt.qty, invoice_dt.nopertek, invoice_dt.kd_kategori, pertek_dt1.kuota');
+			$this->db->from('invoice_hd');
+			$this->db->join('invoice_dt', 'invoice_dt.noinvoice = invoice_hd.noinvoice','inner');
+			$this->db->join('ms_supplier', 'ms_supplier.kd_supplier = invoice_hd.kd_supplier','inner');
+			$this->db->join('ms_barang', 'ms_barang.partno = invoice_dt.partno','inner');
+			$this->db->join('pertek_dt1', 'pertek_dt1.nopertek = invoice_dt.nopertek and pertek_dt1.kd_kategori = invoice_dt.kd_kategori','inner');
+			$this->db->order_by('noinvoice','asc');
+			$this->db->order_by('tgl_invoice','asc');
+			$this->db->where('invoice_dt.nopertek',$nopertek);
+			$this->db->where('invoice_dt.kd_kategori',$kd_kategori);
+			return $this->db->get()->result();
+			
+
+			//query yang akan digunakan untuk export ke excel
+			$this->insert_query_report();
+		}
+		else
+		{
+			$query = $data->query;
+			return $this->db->query($query)->result();
+		}
+	}
+
 }
+
