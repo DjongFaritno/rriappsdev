@@ -222,7 +222,7 @@ class Invoice extends FNZ_Controller
         $id_sub= $data[$i]->id_sub;
         $sum = $this->minvoice->getsum($id_sub, $noinvoice);
         $qtykirim = $sum->qtykirim;
-        // var_dump($qtykirim);
+        // var_dump($qtykirim,$data[$i]->sisa_kuota);
         // return false;
         //  $qtyinvoice=$sum->qtykirim;
 
@@ -241,25 +241,35 @@ class Invoice extends FNZ_Controller
         if($data[$i]->nopertek !="")
         {
             $partno = '<div align="center" style="width: 100%">'.$data[$i]->partno.'</div>';
+            $uraian_barang = '<div align="center" style="width: 100%">'.$data[$i]->uraian_barang.'</div>';
             $qty = '<div align="center" style="width: 100%">'.number_format($data[$i]->qty, 0, '.', ',').'</div>';
             $sisa_kuota = '<div align="center" style="width: 100%">'.number_format($data[$i]->sisa_kuota, 0, '.', ',').'</div>';
             $nopertek = '<div align="center" style="width: 100%">'.$data[$i]->nopertek.'</div>';
             $kategori = '<div align="center" style="width: 100%">'.$data[$i]->kd_kategori.'</div>';
-            $persen =  ($qtykirim / $data[$i]->sisa_kuota) * 100;
+            if($data[$i]->sisa_kuota > 0)
+            {
+              $persen =  ($qtykirim / $data[$i]->sisa_kuota) * 100;
+            }
+            else
+            {
+              $persen = 100;
+            }
+            // var_dump($qtykirim,$persen);
+            // exit();
             // $kuota = $data[$i]->kuota;
             
             if((int)$data[$i]->sisa_kuota > (int)$qtykirim)
             {
-              $kuota = '<div class="progress"><div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
+              $kuota = '<div class="progress"><div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
             }
-            // else
-            // {
-            //   $kuota = '<div class="progress"><div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
-            // }           
+            else
+            {
+              $kuota = '<div class="progress"><div class="progress-bar progress-bar-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:'.$persen.'%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
+            }           
 
             if((int)$data[$i]->sisa_kuota < (int)$qtykirim)
             {
-              $kuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="'.$persen.'" aria-valuemin="0" aria-valuemax="100" style="width:100%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
+              $kuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%"><font color="#000">'.number_format($data[$i]->kuota, 0, '.', ',').'</font></div></div>';
               $sisakuota = (int)$data[$i]->sisa_kuota - (int)$qtykirim;
               $sisakuota = number_format($sisakuota, 0, '.', ',');
               $sisakuota = '<div class="progress"><div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width:100%">'.$sisakuota.'</div></div>';
@@ -272,6 +282,7 @@ class Invoice extends FNZ_Controller
 
             $totalkuotakirim = $qtykirim;
             $totalkuotakirim = '<div align="center" style="width: 100%">'.number_format($totalkuotakirim, 0, '.', ',').'</div>';
+            
 
         }
         else
@@ -288,6 +299,7 @@ class Invoice extends FNZ_Controller
 
         $records["data"][] = array(
           $partno,
+          $uraian_barang,
           $qty,
           $totalkuotakirim,
           $nopertek,
@@ -297,12 +309,58 @@ class Invoice extends FNZ_Controller
           $sisakuota
         );
       }
-
+      
       $records["draw"]            	= $sEcho;
       $records["recordsTotal"]    	= $iTotalRecords;
       $records["recordsFiltered"] 	= $iTotalRecords;
       echo json_encode($records);
     }
+  }
+
+  function cek_over_kuota($idinvoice)
+  {
+    $user = $this->session->userdata('logged_in')['uid'];
+    $noinvoice = $this->minvoice->get_invoiceeimportHD($idinvoice);
+    if($noinvoice != null)
+    {
+      $noinvoice = $noinvoice->noinvoice;
+      $data               = $this->minvoice->GetDataEimport($user,'cekkuota',$noinvoice);
+      $ilength = count($data);
+      for($i=0;$i<$ilength;$i++)
+      {
+        $id_sub= $data[$i]->id_sub;
+        $sum = $this->minvoice->getsum($id_sub, $noinvoice);
+        $qtykirim = $sum->qtykirim;
+        // $sisakuota = (int)$data[$i]->sisa_kuota - (int)$qtykirim;
+        // var_dump($sisakuota);
+        // // echo json_encode($status);
+        // exit();
+        if((int)$data[$i]->sisa_kuota - (int)$qtykirim<0)
+        {
+          $status = "OVER";
+          // var_dump($status);
+          echo json_encode($status);
+          exit();
+        }        
+        
+      }
+      $status = "OK";
+      echo json_encode($status);
+      
+     
+    }
+  }
+
+  function cek_eimport($idinvoice)
+  {
+    $data = $this->minvoice->_cek_eimport($idinvoice);
+    echo json_encode($data);
+  }
+
+  function cek_invoice($idinvoice)
+  {
+    $data = $this->minvoice->_cek_invoice($idinvoice);
+    echo json_encode($data);
   }
 
   function SaveEimportToinvoice()
@@ -417,27 +475,33 @@ class Invoice extends FNZ_Controller
 
     if($noinvoice != null)
     {
-      $noinvoice = $noinvoice->noinvoice;
-      $data = $this->minvoice->get_invoicedt($user,'invoicedt',$noinvoice);
-      $iTotalRecords  	= count($data);
-      $iDisplayLength 	= intval($_REQUEST['length']);
-      $iDisplayLength 	= $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-      $iDisplayStart  	= intval($_REQUEST['start']);
-      $sEcho				= intval($_REQUEST['draw']);
-      $records            = array();
-      $records["data"]    = array();
-      $end = $iDisplayStart + $iDisplayLength;
-      $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-      $fdate = 'd-M-Y';
+      $noinvoice            = $noinvoice->noinvoice;
+      $data                 = $this->minvoice->get_invoicedt($user,'invoicedt',$noinvoice);
+      $iTotalRecords  	    = count($data);
+      $iDisplayLength 	    = intval($_REQUEST['length']);
+      $iDisplayLength 	    = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+      $iDisplayStart  	    = intval($_REQUEST['start']);
+      $sEcho			          = intval($_REQUEST['draw']);
+      $records              = array();
+      $records["data"]      = array();
+      $end                  = $iDisplayStart + $iDisplayLength;
+      $end                  = $end > $iTotalRecords ? $iTotalRecords : $end;
+      $fdate                = 'd-M-Y';
+
       for($i = $iDisplayStart; $i < $end; $i++)
       {
+          $partno           = '<div align="center">'.$data[$i]->partno.'</div>';
+          $uraian_barang    = '<div align="center">'.$data[$i]->uraian_barang.'</div>';
+          $qty              = '<div align="center">'.$data[$i]->qty.'</div>';
+          $unit_price       = '<div align="center">'.$data[$i]->unit_price.'</div>';
+          $kd_curr          = '<div align="center" >'.$data[$i]->kd_curr.'</div>';
+
           $records["data"][] = array(
-          $data[$i]->partno,
-          $data[$i]->qty,
-          $data[$i]->unit_price,
-          $data[$i]->kd_curr
-          // ,
-          // $act
+          $partno,
+          $uraian_barang,
+          $qty,
+          $unit_price,
+          $kd_curr
           );
       }
 

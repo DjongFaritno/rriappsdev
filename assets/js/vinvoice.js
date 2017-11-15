@@ -107,53 +107,170 @@ function BtnUpInvoice(){
 
 	if(validasi_upload()==true)
 	{
-		bootbox.confirm("Unggah Invoice "+noinvoice+"?",
-		function(result)
-			{	
-				if(result==true)
-				{
-					
-					var iform = $('#form_upload_invoice')[0];
-					var data = new FormData(iform);
+		$.ajax({
+			
+			type:"POST",
+			url:base_url+"invoice/cek_eimport/"+noinvoice,
+			dataType:"html",
+			success:function(data){
 	
-
-						$.ajax({
-							type:"POST",
-							url:base_url+"invoice/upload",
-							type: 'post',
-							enctype: 'multipart/form-data',
-							contentType: false,
-							processData: false,
-							data: data,
-							// dataType:"JSON",
-							// data:json_data,
-							success:function(data){
-
-								bootbox.alert({
-									message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Unggah Data Berhasil.",
-									size: 'small',
-									callback: function () {
-										window.location = base_url+'/invoice/cekkuota';
-									}
-								});
+				var data = $.parseJSON(data);
+				// var ilength = data.length;
+				if (data !=null)
+				{
+					bootbox.alert({
+						title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ALERT</div>",
+						message: "<b>No INVOICE "+noinvoice+" Sedang di unggah oleh user lain</b>",
+						buttons: 
+						{
+							ok: {
+								label: 'TUTUP',
+								className: 'btn-danger'
 							}
-						});
-
-					// }
-
+						},
+						callback: function () {
+							$('#btn_UpInvoice').show();
+							$('#img-load').hide();
+						}
+					});
+					
 				}
 				else
 				{
-					$('#btn_UpInvoice').show();
-					$('#img-load').hide();
+					$.ajax({
+						
+						type:"POST",
+						url:base_url+"invoice/cek_invoice/"+noinvoice,
+						dataType:"html",
+						success:function(data){
+				
+							var data = $.parseJSON(data);
+							// var ilength = data.length;
+							if (data !=null)
+							{
+								bootbox.alert({
+									title: "<div class='callout callout-danger'><span class='fa fa-exclamation-triangle text-danger'></span>&nbsp;ALERT</div>",
+									message: "<b>No INVOICE "+noinvoice+" sudah ada!!</b>",
+									buttons: 
+									{
+										ok: {
+											label: 'TUTUP',
+											className: 'btn-danger'
+										}
+									},
+									callback: function () {
+										$('#btn_UpInvoice').show();
+										$('#img-load').hide();
+									}
+								});
+								
+							}
+							else
+							{
+								bootbox.confirm("Unggah Invoice "+noinvoice+"?",
+								function(result)
+									{	
+										if(result==true)
+										{
+											
+											var iform = $('#form_upload_invoice')[0];
+											var data = new FormData(iform);
+							
+						
+												$.ajax({
+													type:"POST",
+													url:base_url+"invoice/upload",
+													type: 'post',
+													enctype: 'multipart/form-data',
+													contentType: false,
+													processData: false,
+													data: data,
+													// dataType:"JSON",
+													// data:json_data,
+													success:function(data){
+						
+														bootbox.alert({
+															message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Unggah Data Berhasil.",
+															size: 'small',
+															callback: function () {
+																window.location = base_url+'/invoice/cekkuota';
+															}
+														});
+													}
+												});
+						
+											// }
+						
+										}
+										else
+										{
+											$('#btn_UpInvoice').show();
+											$('#img-load').hide();
+										}
+									}
+								);
+							}
+							
+							
+						}
+				
+					});
+
+					// bootbox.confirm("Unggah Invoice "+noinvoice+"?",
+					// function(result)
+					// 	{	
+					// 		if(result==true)
+					// 		{
+								
+					// 			var iform = $('#form_upload_invoice')[0];
+					// 			var data = new FormData(iform);
+				
+			
+					// 				$.ajax({
+					// 					type:"POST",
+					// 					url:base_url+"invoice/upload",
+					// 					type: 'post',
+					// 					enctype: 'multipart/form-data',
+					// 					contentType: false,
+					// 					processData: false,
+					// 					data: data,
+					// 					// dataType:"JSON",
+					// 					// data:json_data,
+					// 					success:function(data){
+			
+					// 						bootbox.alert({
+					// 							message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Unggah Data Berhasil.",
+					// 							size: 'small',
+					// 							callback: function () {
+					// 								window.location = base_url+'/invoice/cekkuota';
+					// 							}
+					// 						});
+					// 					}
+					// 				});
+			
+					// 			// }
+			
+					// 		}
+					// 		else
+					// 		{
+					// 			$('#btn_UpInvoice').show();
+					// 			$('#img-load').hide();
+					// 		}
+					// 	}
+					// );
 				}
+				
+				
 			}
-		);
+	
+		});
+		
 	}
 
 }
 
 function validasi_upload(){
+	
 	if($('#noinvoice').val() == '')
 	{	
 		bootbox.alert({
@@ -165,6 +282,10 @@ function validasi_upload(){
 					label: 'TUTUP',
 					className: 'btn-danger'
 				}
+			},
+			callback: function () {
+				$('#btn_UpInvoice').show();
+				$('#img-load').hide();
 			}
 		})
 		return false();
@@ -182,8 +303,14 @@ function validasi_upload(){
 					label: 'TUTUP',
 					className: 'btn-danger'
 				}
+			},
+			callback: function () {
+				$('#btn_UpInvoice').show();
+				$('#img-load').hide();
 			}
+			
 		})
+		
 		return false();
 
 	}
@@ -199,12 +326,16 @@ function validasi_upload(){
 					label: 'TUTUP',
 					className: 'btn-danger'
 				}
+			},
+			callback: function () {
+				$('#btn_UpInvoice').show();
+				$('#img-load').hide();
 			}
 		})
 		return false();
 
 	}
-
+	
 	return true;
 }
 

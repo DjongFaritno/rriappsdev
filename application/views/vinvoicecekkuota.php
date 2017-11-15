@@ -124,19 +124,22 @@ var base_url = "<?php echo base_url(); ?>";
 	                </div>
 								</div>
 			</div>
+			
 			<div class="box">
 				<table id="tb_listx" class="table table-bordered">
 					<thead>
 			      <tr>
 			      <!-- <th style="text-align:center">ID SUB</th> -->
-			      <th style="text-align:center">PART</th>
-						<th style="text-align:center">QTY</th>
-						<th style="text-align:center">TOTAL QTY</th>
-						<th style="text-align:center">NO PERTEK</th>
-						<th style="text-align:center">KATEGORI PERTEK</th>
-						<th style="text-align:center">KUOTA AWAL</th>
-						<th style="text-align:center">KUOTA SAAT INI</th>
-			      		<th style="text-align:center">SISA KUOTA</th>
+					<th style="text-align:center">PART</th>
+					<th style="text-align:center">URAIAN BARANG</th>
+					<th style="text-align:center">QTY</th>
+					<th style="text-align:center">TOTAL QTY</th>
+					<th style="text-align:center">NO PERTEK</th>
+					<th style="text-align:center">KATEGORI PERTEK</th>
+					<th style="text-align:center">KUOTA AWAL</th>
+					<th style="text-align:center">KUOTA SAAT INI</th>
+					<th style="text-align:center">SISA KUOTA</th>
+					<!-- <th style="text-align:center">Status</th> -->
 			     <!-- <th style="width: 40px">Label</th> -->
 			    </tr>
 			  </thead>

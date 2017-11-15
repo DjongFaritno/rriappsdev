@@ -197,55 +197,72 @@ function cekItem(i_kode_kategori){
 function simpanData(){
 
 	if(validasiForm()==true){
-
-		//detail data
-		var item_data = "";
-
-		var oTable 		= document.getElementById('tb_list');
-		var rowLength 	= oTable.rows.length;
-			rowLength 	= rowLength-1;
-
-		for (i = 1; i < rowLength; i++){
-
-			var irow = oTable.rows.item(i);
-
-			item_data += irow.cells[1].innerHTML+"#"; //kode kategori
-			item_data += irow.cells[3].innerHTML+"#"; //quota
-			item_data += irow.cells[4].innerHTML+"#"; //ukuran
-			item_data += irow.cells[5].innerHTML+"#"; //keterangan
-
-			item_data += ';';
-		}
-
 		//header data
 		var no_pengajuan 	= $('#txt_no_pengajuan').val();
 		var tgl_pengajuan 	= $('#dtp_tgl_pengajuan').val();
 
-		var json_data 	= {
-
-			'no_pengajuan'		: no_pengajuan,
-			'tgl_pengajuan' 	: tgl_pengajuan,
-			'item'		: item_data
-			};
-
 		$.ajax({
-
-			type:"POST",
-			url:base_url+"pengajuan/simpan_pengajuan",
-			dataType:"JSON",
-			data:json_data,
-			success:function(data){
-
-				bootbox.alert({
-					message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Simpan Data Berhasil.",
-					size: 'small',
-					callback: function () {
-
-						window.location = base_url+'/pengajuan';
+			
+					type:"POST",
+					url:base_url+"pengajuan/get_data_pengajuan/"+no_pengajuan,
+					dataType:"html",
+					success:function(data){
+			
+						var data = $.parseJSON(data);
+						if (data !=null)
+						{							
+							bootbox.alert("No Pengajuan Sudah ada");
+						}
+						else
+						{
+							//detail data
+							var item_data = "";
+							
+							var oTable 		= document.getElementById('tb_list');
+							var rowLength 	= oTable.rows.length;
+								rowLength 	= rowLength-1;
+					
+							for (i = 1; i < rowLength; i++){
+					
+								var irow = oTable.rows.item(i);
+					
+								item_data += irow.cells[1].innerHTML+"#"; //kode kategori
+								item_data += irow.cells[3].innerHTML+"#"; //quota
+								item_data += irow.cells[4].innerHTML+"#"; //ukuran
+								item_data += irow.cells[5].innerHTML+"#"; //keterangan
+					
+								item_data += ';';
+							}
+					
+							var json_data 	= {
+					
+								'no_pengajuan'		: no_pengajuan,
+								'tgl_pengajuan' 	: tgl_pengajuan,
+								'item'		: item_data
+								};
+					
+							$.ajax({
+					
+								type:"POST",
+								url:base_url+"pengajuan/simpan_pengajuan",
+								dataType:"JSON",
+								data:json_data,
+								success:function(data){
+					
+									bootbox.alert({
+										message: "<span class='glyphicon glyphicon-ok-sign'></span>&nbsp;Simpan Data Berhasil.",
+										size: 'small',
+										callback: function () {
+					
+											window.location = base_url+'/pengajuan';
+										}
+									});
+								}
+							});
+						}
 					}
 				});
-			}
-		});
+		
 	}
 }
 

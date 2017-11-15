@@ -42,7 +42,32 @@
           <!-- The time line pertanggal-->
           <ul class="timeline">
             <!-- timeline time label -->
-             <!-- //copy from this -->
+          <!-- //copy from this -->
+            <li class="time-label">
+                  <span class="bg-black">
+                    24 Okt. 2017
+                  </span>
+            </li>
+            <!-- /.timeline-label -->
+            <!-- timeline item -->
+            <li>
+            <i class="fa fa-check-square-o bg-green"></i>
+
+              <div class="timeline-item">
+                <h3 class="timeline-header"><a href="#">VERSION 1.2</a><!-- --></h3>
+
+                <div class="timeline-body">
+                  -Penambahan kolom uraian_barang di modul invoice & di modul cek kuota.
+                  <br>
+                  -Penambahan pemberitahuan jika no invoice sudah ada didatabase saat upload invoice maupun saat save invoice.
+                  <div class="progress">
+                <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                  <span class="sr-only">40% Complete (success)</span>
+                </div>
+              </div>
+                  </div>
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     06 Okt. 2017
@@ -59,8 +84,8 @@
                 <div class="timeline-body">
                   -Penambahan Fungsi Hapus Invoice & Perhitungan ulang sisa kuota.
                   </div>
-                <!-- sampe sini -->
-             <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     05 Okt. 2017
@@ -77,8 +102,8 @@
                 <div class="timeline-body">
                   -Penambahan Histori Invoice di Kategori Pertek.
                   </div>
-                <!-- sampe sini -->
-             <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     03 Okt. 2017
@@ -95,8 +120,8 @@
                 <div class="timeline-body">
                   -Perbaikan Perhitungan Kuota.
                   </div>
-                <!-- sampe sini -->
-             <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     19 Sep. 2017
@@ -113,8 +138,8 @@
                 <div class="timeline-body">
                   -Penambahan Verifikasi saat simpan Part di Pengajuan (Part tidak bisa disimpan jika part yang sama sudah ada di pengajuan lain yang berstatus aktif.
                   </div>
-                <!-- sampe sini -->
-             <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     09 Agu. 2017
@@ -131,8 +156,8 @@
                 <div class="timeline-body">
                   -Penambahan Verifikasi Saat Akan Delete kategori pengajuan.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     14 Jun. 2017
@@ -150,8 +175,8 @@
                   -Penambahan Form VIew DT2 Pertek.
                   <br>-Perubahan Tombol Action.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     06 Jun. 2017
@@ -169,9 +194,8 @@
                   -Perubahan ID di datebase.
                   <br>-Penambahan Form VIew DT1 Pertek.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     29 Mei. 2017
@@ -189,8 +213,8 @@
                   -Penambahan list data invoice.
                   <br>-Penambahan link untuk melihat list detail invoice.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     26 Mei. 2017
@@ -207,9 +231,8 @@
                 <div class="timeline-body">
                   -Penambahan Data Table di form Data invoice.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     24 Mei. 2017
@@ -227,8 +250,8 @@
                   -Penambahan Proses Simpan dari Proses upload.
                   <br> -Penambahan Data Table di form Data invoice.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     19 Mei. 2017
@@ -245,8 +268,8 @@
                 <div class="timeline-body">
                   -Alter table invoice, no invoice length = 25.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     24 Apr. 2017
@@ -263,8 +286,8 @@
                 <div class="timeline-body">
                   -Penambahan modul Cek Kuota invoice.
                   </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     17 Apr. 2017
@@ -282,8 +305,8 @@
                   -Pembuatan Menu Invoice
                   <br>-Pembuatan modul unggah invoice
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     10 Apr. 2017
@@ -302,8 +325,8 @@
                   <br>-Perbaikan kata hapus pada modal ubah di pengajuan.
                   <br>-Penambahan tombol update tanggal saat <i>klik</i> tanggal di form pengajuan baru.
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     31 Mar. 2017
@@ -320,8 +343,8 @@
                 <div class="timeline-body">
                   -Penambahan Modul Edit Untuk Pengajuan Yang Belum DIjadikan PERTEK
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     17 Mar. 2017
@@ -340,8 +363,8 @@
                   <br>-Penambahan nama kategori di form tambah pengajuandt2
                   <br>-Textbox no pertek dipanjangkan
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     02 Mar. 2017
@@ -359,8 +382,8 @@
                   -Penambahan Verifikasi Pengajuan, jika sudah dijadikan Pertek, maka tidak bisa di edit dan di hapus.
                   <br>-Penambahan View Pertek Detail 1
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     21 Feb. 2017
@@ -380,8 +403,8 @@
                   <br>-Pembuatan Menu Pertek
                   <br>-Pembuatan Design Form Pertek
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     30 Jan. 2017
@@ -401,8 +424,8 @@
                   <br>-Penambahan tombol Hapus, List Part Pada ViewDt1 (List Kategori Pengajuan)
                   <br>-Penambahan tombol Tambah Part, Hapus Pada ViewDt2
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     24 Jan. 2017
@@ -420,8 +443,8 @@
                   -Penambahan view detail pengajuan
                   <br>-Penambahan Design Tambah Part List di detail pengajuan
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     20 Jan. 2017
@@ -439,8 +462,8 @@
                   -Penambahan auto number nopengajuan di form tambah pengajuan
                   <br>-Penambahan Design view detail pengajuan
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     19 Jan. 2017
@@ -458,8 +481,7 @@
                   -Penambahan Tambah pengajuan dan Item Pengajuan
                 </div>
                 <!-- sampe sini -->
-            <!-- //copy from this -->
-            <!-- //copy from this -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     16 Jan. 2017
@@ -477,8 +499,8 @@
                   -Pembuatan Menu Pengajuan
                   <br>-Pembuatan CHANGELOG/histori versi
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     13 Jan. 2017
@@ -497,8 +519,8 @@
                   <br>-Pembuatan Menu Master Kategori
                   <br>-Pembuatan Menu Master Currency
                 </div>
-                <!-- sampe sini -->
-            <!-- //copy from this -->
+          <!-- sampe sini -->
+          <!-- //copy from this -->
             <li class="time-label">
                   <span class="bg-black">
                     10 Jan. 2017
@@ -516,7 +538,7 @@
                   -Pembuatan Menu Master Barang
                   <br>-Pembuatan Menu Master User
                 </div>
-                <!-- sampe sini -->
+          <!-- sampe sini -->
             <!-- timeline time label -->
             <li class="time-label">
                   <span class="bg-black">

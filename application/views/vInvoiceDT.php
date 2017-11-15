@@ -122,9 +122,10 @@ var base_url = '<?php echo base_url(); ?>';
 				    <thead>
 							<tr>
 				     <th style="text-align:center">PART</th>
+				     <th style="text-align:center">URAIAN BARANG</th>
 						<th style="text-align:center">QTY</th>
 						<th style="text-align:center">UNIT PRICE</th>
-						<th style="text-align:center">KODE CURRENCY</th>
+						<th style="width: 10%" >KODE CURRENCY</th>
 						<!--<th style="text-align:center">ACTION</th>-->
 				    	</tr>
 					</thead>

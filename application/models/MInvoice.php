@@ -90,6 +90,25 @@ class MInvoice extends CI_Model
 		return $data;
 	}
 
+	function _cek_eimport($idinvoice)
+	{
+		$data = "SELECT * FROM eimportdt where noinvoice = '$idinvoice'";
+		// var_dump($data);
+		// exit();
+		// echo $data;
+		// exit();
+		return $this->db->query($data)->row();
+	}
+	function _cek_invoice($idinvoice)
+	{
+		$data = "SELECT * FROM invoice_hd where noinvoice = '$idinvoice'";
+		// var_dump($data);
+		// exit();
+		// echo $data;
+		// exit();
+		return $this->db->query($data)->row();
+	}
+
 	function get_invoiceeimportHD($idnoinvoice)
 	{
 		$data = "SELECT * FROM eimporthd where idinvoicehd = '$idnoinvoice'";
@@ -107,17 +126,20 @@ class MInvoice extends CI_Model
 		if($data==null)
 		{ //data null = pertama kali load page
 
-			$this->db->select('eimportdt.noinvoice, eimportdt.partno, eimportdt.qty,
+			$this->db->select('eimportdt.noinvoice, eimportdt.partno, ms_barang.uraian_barang, eimportdt.qty,
 			pertek_dt2.nopertek,pertek_dt1.kd_kategori,
 			pertek_dt2.id_sub, pertek_dt1.kuota, pertek_dt1.sisa_kuota,  pertek_hd.status');
 			$this->db->from('eimportdt');
+			$this->db->join('eimporthd', 'eimporthd.noinvoice = eimportdt.noinvoice', 'inner');
 			$this->db->join('pertek_dt2', 'pertek_dt2.partno = eimportdt.partno', 'left');
 			$this->db->join('pertek_dt1', 'pertek_dt1.id_sub = pertek_dt2.id_sub', 'left');
 			$this->db->join('pertek_hd', 'pertek_hd.nopertek = pertek_dt2.nopertek', 'left');
+			$this->db->join('ms_barang', 'eimportdt.partno = ms_barang.partno', 'left');
 			$this->db->order_by('nopertek','Desc');
 			$this->db->order_by('kd_kategori','Desc');
-			$this->db->where('noinvoice',$noinvoice);
+			$this->db->where('eimportdt.noinvoice',$noinvoice);
 			$this->db->where('status','active');
+			$this->db->where('userid',$user);
 			$this->db->or_where('status',null);
 			// echo $this->db->last_query();
 			// 										exit();
@@ -197,10 +219,10 @@ class MInvoice extends CI_Model
 		if($data==null)
 		{ //data null = pertama kali load page
 
-			$this->db->select('invoice_dt.noinvoice, invoice_dt.partno, invoice_dt.qty,
+			$this->db->select('invoice_dt.noinvoice, invoice_dt.partno,ms_barang.uraian_barang, invoice_dt.qty,
 			invoice_dt.unit_price, invoice_dt.kd_curr');
 			$this->db->from('invoice_dt');
-			// $this->db->join('eimportdt', 'eimportdt.noinvoice = eimporthd.noinvoice');
+			$this->db->join('ms_barang', 'invoice_dt.partno = ms_barang.partno');
 			$this->db->order_by('noinvoice','Asc');
 			$this->db->where('noinvoice',$noinvoice);
 			return $this->db->get()->result();
